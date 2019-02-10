@@ -1,0 +1,73 @@
+[user]
+  name = Jean-Michel Frouin
+  email = jm@frouin.me
+
+[color]
+  branch = true
+  diff = true
+  interactive = true
+  ui = true
+  status = true
+
+[core]
+  editor = vim
+  preloadindex = true
+  autocrlf = false
+  packedGitLimit = 256m
+  packedGitWindowSize = 256m
+  whitespace = trailing-space,space-before-tab,indent-with-non-space
+	excludesfile = /Users/jmfrouin/.gitignore
+
+[alias]
+  ci = commit
+  cp = cherry-pick
+  co = checkout
+  st = status
+  ilog = log --pretty=format:'%h - %an, %ar : %s'
+  glog = log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset --> %C(magenta)%d%Creset' --abbrev-commit --date=relative
+  stat = shortlog -sne --all
+  last = log -1 HEAD
+  unstage = reset HEAD --
+
+  undo = git reset --soft HEAD^
+  count = rev-list --count HEAD
+  amend = commit --amend
+  changes = diff --name-status
+  dic = diff --cached
+  diffstat = diff --stat
+  svnpull = svn rebase
+  svnpush = svn dcommit
+  lc = !git oneline ORIG_HEAD.. --stat --no-merges
+  addm = !git-ls-files -m -z | xargs -0 git-add && git status
+  addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
+  rmm = !git ls-files -d -z | xargs -0 git-rm && git status
+  vim = !git-ls-files -m -z | xargs -0 vim
+  vimall = !git-ls-files -m -o --exclude-standard -z | xargs -0 vim
+
+[diff]
+  tool = bcompare
+
+[merge]
+  tool = vimdiff
+[gc]
+	auto = 0
+	autoDetach = false
+
+[push]
+	default = current
+
+[filter "indent"]
+
+	clean = indent
+	smudge = cat
+[pack]
+  SizeLimit = 256m
+  packSizeLimit = 256m
+  windowMemory = 256m
+  deltaCacheSize = 256m
+  threads = 1
+
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
