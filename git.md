@@ -1,0 +1,260 @@
+---
+layout: post
+status: publish
+published: true
+permalink: git
+title: GIT
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2015-05-05 19:00:31 +0100'
+date_gmt: '2015-05-05 18:00:31 +0100'
+categories:
+- git
+- home
+tags: []
+comments: []
+---
+<h2>Introduction</h2>
+GIT est un gestionnaire de version décentralisé écrit par Linux Torvalds (aussi inventeur du noyau Linux)
+
+Quelles sont les différences entre un VCS (Version Control System) décentralisé (comme GIT) et un centralisé (comme SVN) ?
+
+Dans GIT, les copies de travail (l'endroit où sont stockés le code et ses modiciations) sont locales. Pour partager le code, ou les mettre sur un dépôt central, il faut le faire explicitement.
+Dans SVN, toutes les informations sont centralisées sur un serveur central, à chaque commit.
+
+De ce fait, l'utilisation des branches devient un part importante du développement, car locales.
+
+<h2>Workflow</h2>
+A définir
+
+<h2>Tirer une copie de travail d'un projet</h2>
+Avant toute chose, il faut une copie de travail du projet sur lequel on va travailler.
+Pour ce faire on utilise la commande la commande clone de git : 
+
+{% highlight bash %}
+git clone git@serveur_git:projet.git nom_copie_locale
+{% endhighlight %}
+
+<h2>Configurer GIT</h2>
+Maintenant, qu'une copie de travail est prete, nous allons commençer à travailler dedans.
+Une bonne chose à faire à ce moment, est de <a href="https://frouin.me/gitconfig">configurer GIT</a> pour mieux l'utiliser.
+
+<h2>Mettre à jour</h2>
+Comme nous sommes plusieurs à travailler, une mise a jour du code, en récupérant les dernières modification apportées à master, régulièrement, est nécessaire.
+
+Pour ce faire, nous mettons à jour master : 
+
+{% highlight bash %}
+git checkout master
+git fetch
+git pull
+{% endhighlight %}
+
+Puis nous rappatrions les nouveaux commits de master sur notre branche :
+<h3>En workflow rebase</h3>
+{% highlight bash %}
+git checkout branch
+git rebase master
+{% endhighlight %}
+ 
+<h3>En workflow merge</h3>
+{% highlight bash %}
+git checkout branch
+git merge master
+{% endhighlight %}
+
+<h2>Copie locale</h2>
+Pour connaitre les fichiers qui ont été modifiés depuis le dernier commit, utiliser la commande suivante :
+{% highlight bash %}
+git status
+{% endhighlight %}
+
+Pour ajouter un fichier qui n'était pas déjà dans git, il faut l'ajouter explicitement avec la commande :
+{% highlight bash %}
+git add nom_du_fichier
+{% endhighlight %}
+
+On peut éventuellement ajouter tous les nouveaux fichiers avec la commande :
+{% highlight bash %}
+git add -A
+{% endhighlight %}
+
+<b>Si il est nécessaire d'ignorer certains fichiers, il faut éditer le fichier .gitignore qui se trouve à la racine du site.
+Attention cela ne marche que avec les fichiers qui ne sont pas déjà ajouté à la gestion de version.</b>
+
+Enfin pour sauvegarder un changement localement on commit:
+{% highlight bash %}
+git commit -m "Message explicite"
+{% endhighlight %}
+
+<h2>Les branches</h2>
+<h3>Création</h3>
+Pour créer une branche : 
+{% highlight bash %}
+git branch branche
+{% endhighlight %}
+<h3>Changement</h3>
+Pour changer de branche : 
+{% highlight bash %}
+git checkout branche
+{% endhighlight %}
+<h3>Lister les branches locales</h3>
+{% highlight bash %}
+git branch
+{% endhighlight %}
+<h3>Lister les branches distantes</h3>
+{% highlight bash %}
+git branch -r
+{% endhighlight %}
+<h3>Supprimer une branche mergée</h3>
+{% highlight bash %}
+git branch -d branche
+{% endhighlight %}
+<h3>Supprimer une branche non mergée</h3>
+{% highlight bash %}
+git branch -D branche
+{% endhighlight %}
+<h3>Supprimer une branche distante</h3>
+{% highlight bash %}
+git push origin :branche
+{% endhighlight %}
+<h3>Effacer les références locales des branches distantes</h3>
+{% highlight bash %}
+git remote prune --dry-run origin
+{% endhighlight %}
+<h3>Voir le log d'une branche distante</h3>
+{% highlight bash %}
+git log origin/ID_branch_label
+{% endhighlight %}
+<h3>Créer une branche locale ID_branch_label automatiquement depuis la branche distante origin/ID_branch_label (et la tracker)</h3>
+{% highlight bash %}
+git co -t origin/ID_branch_label
+{% endhighlight %}
+<h3>Remise à zéro d'une branche</h3>
+{% highlight bash %}
+git reset --hard origin/ID_branch_label
+{% endhighlight %}
+<h2>Sous Modules</h2>
+<h3>Ajouter un sous module</h3>
+{% highlight bash %}
+git submodule add git://github.com/author/module.git module
+{% endhighlight %}
+<h3>Retirer un sous module</h3>
+{% highlight bash %}
+git submodule deinit module
+git rm module
+{% endhighlight %}
+<h3>Déplacer un sous module</h3>
+Modifier son nom dans .gitmodules
+{% highlight bash %}
+mv oldpath newpath
+git rm oldpath
+git add newpath
+git submodule sync
+{% endhighlight %}
+<h3>Initialiser les sous modules</h3>
+{% highlight bash %}
+git submodule init
+{% endhighlight %}
+<h3>Mettre à jour les sous modules</h3>
+{% highlight bash %}
+git submodule update
+{% endhighlight %}
+<h3>Voir les versions des sous modules utilisés</h3>
+{% highlight bash %}
+git submodule
+{% endhighlight %}
+<h3>Pousser tous les sous modules sur une machine distante</h3>
+{% highlight bash %}
+git submodule foreach 'git push --all gitolite@vm.domain.com:`basename $name` || true'
+{% endhighlight %}
+<h2>Avancé</h2>
+<h3>Rebase intéractif depuis le dernier push</h3>
+{% highlight bash %}
+git rebase -i @{u}
+{% endhighlight %}
+<h3>Recherche d'un pattern</h3>
+git grep isCiblexInterrupted
+<h3>Affichage des logs</h3>
+git log -p
+<h3>Réécrire Nom et Email des anciens commits</h3>
+git filter-branch --env-filter "export GIT_AUTHOR_NAME='New name'; export GIT_AUTHOR_EMAIL='New email'" HEAD
+<h3>Afficher les statistiques pré-commit</h3>
+git diff --stat
+git diff --stat --cached
+<h3>Trouver un commit</h3>
+git log -1 :"nom du texte"
+<h3>Trouve les commits qui sont sur master et qui ne sont pas sur la branche dev</h3>
+git log --graph origin/dev..origin/master --decorate
+<h3>Rebase onto</h3>
+git rebase --onto master 1bcdbef ID_Description
+<h3>Rebase intéractif</h3>
+git rebase -i commit_ID
+git reset --soft HEAD^
+git reset fichier_a_editer
+<h3>Différence entre deux branches (sortir les commit de diff)</h3>
+git log master..6410
+git help rev-parsel
+<h3>Modifier l'auteur d'un commit git, soit au moment du commit</h3>
+git commit --author "Jean-Michel Frouin <jm@frouin.me>"
+<h3>Soit en amendant le commit d'avant</h3>
+git commit --amend --author "Jean-Michel Frouin <jm@frouin.me>"
+<h3>Voir une remote</h3>
+git remote show remote_name
+<h3>Supprimer une branche distante</h3>
+git push remote :branch
+<h3>Tracker une branche distante</h3>
+git branch --set-upstream foo upstream/foo
+git config push.default tracking
+<h3>Faire un cherry-pick</h3>
+git cherry-pick e00a5154e559b50133fa4012de62f995b1b19df9
+<h3>Afficher les 3 derniers commits</h3>
+git log --pretty=oneline --abbrev-commit HEAD~3..HEAD
+<h3>Tirer une branche distante en local</h3>
+git co -b local_name origin/distant_name
+git fetch origin remote_branche_name:local_branch_name
+<h3>Sortir un commit en patch puis l'appliquer</h3>
+git format-patch -1 9da5d8eb0a527ce11aa86dbcee6cd7a6bdd4707d
+git am 0001-ajustement-logs.patch
+git log --pretty=oneline --abbrev-commit HEAD~3..HEAD
+<h3>Voir les branches qui ne sont pas mergées</h3>
+git branch --no-merged
+<h3>Repositionner un tag</h3>
+git tag -f tag_name
+<h3>Obtenir de l'aide sur les révisions</h3>
+git help revisions
+<h3>Supprimer les branches qui ont été mergées</h3>
+git branch -r --merged
+git branch
+<h3>Reprendre un commit</h3>
+git --amend
+<h3>Corriger un commit</h3>
+git co master
+git rebase -i ID_COMMIT~1
+<h3>Ajouter un fichier en mode interactif (notamment en rebase interactif)</h3>
+git add -i nom_fu_fichier
+git diff --cached
+git rebase --continue
+<h3>Effacer une branche en en poussant une autre</h3>
+git push -f origin master :branche_to_del
+<h3>git stash</h3>
+git stash save
+git stash list
+git stash apply stash@{0}
+git stash drop stash@{0}
+
+git stash push
+git stash pop
+
+git stash clear
+<h3>Exporter une copie</h3>
+git archive --format=zip --prefix=name HEAD > name.zip
+
+<h3>Modifier la HEAD d'une remote</h3>
+Coté copie de travail : 
+git remote set-head origin dev
+
+Coté serveur :
+git symbolic-ref HEAD refs/heads/dev
