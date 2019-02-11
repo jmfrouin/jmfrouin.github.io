@@ -11,7 +11,7 @@ comments: false
 <a href="/mlp">MLP C++ &amp; wxWidgets 2010</a><br/>
 <a href="/neuron">Neuron C# &amp; .Net 2010-2011</a><br/>
 <a href="/reversi">SReversi 1.0 for Windows CE</a><br/>
-<a href="/sdatabase">SDatabase 0.40 C++ &amp; wxWidgets 2006-2007</a><br/>
+<a href="https://github.com/jmfrouin/sdatabase">sdatabase 0.40 C++ &amp; wxWidgets 2006-2007</a><br/>
 <a href="/scleaner">All versions (and platforms) of scleaner</a><br/>
 <a href="/scsvmanager">ScsvManager 0.45 Beta C++ 2004</a><br/>
 <a href="/sinfos">SInfos 1.12 C++ 2004</a><br/>
