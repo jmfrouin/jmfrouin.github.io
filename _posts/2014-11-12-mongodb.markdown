@@ -1,0 +1,103 @@
+---
+layout: post
+status: publish
+permalink: mongodb
+published: false
+title: MongoDB
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2014-11-12 20:51:11 +0200'
+date_gmt: '2014-11-12 19:51:11 +0200'
+categories:
+- mongo
+tags: []
+comments: []
+---
+<h2>Connection à un replica set</h2>
+{% highlight bash %}
+mongo --host mongodb-id/machine1.company.lan:27017,machine2.company.lan:27017,machine3.company.lan:27017
+
+db.getCollectionNames();
+rs.slaveOK();
+{% endhighlight %}
+<!--more-->
+
+<h2>Rechercher un document contenant</h2>
+{% highlight bash %}
+property: {"$exists":"true"}
+{% endhighlight %}
+
+<h2>Import / Export</h2>
+{% highlight bash %}
+mongoexport -v --host mongodb-id/mongo-s0.local,mongo-s1.local --db db_name --collection collection_name > db_name-collection_name.export
+puis
+mongoimport -v --host mongodb-id/mongo-s0.local,mongo-s1.local --db db_name --collection collection_name db_name-collection_name.export
+{% endhighlight %}
+
+ou
+{% highlight bash %}
+mongodump --host mongodb-id-dev/db.dev.company.lan:27017,serveur.company.lan:27017,brutus.dev.company.lan:27017 --db widget_manager
+puis
+mongorestore --host mongodb-id/mongo-s0.local,mongo-s1.local --db widget_manager mongo/widgets-2012081801/widget_manager
+mongorestore --host mongodb-id-dev/brutus.company.lan:27017,db.dev.company.lan:27017,serveur.company.lan:27017 --db widget_manager
+{% endhighlight %}
+
+<h2>Voir les bases</h2>
+{% highlight bash %}
+show dbs;
+{% endhighlight %}
+
+<h2>Voir les collections</h2>
+{% highlight bash %}
+show collections;
+{% endhighlight %}
+
+<h2>Indexation</h2>
+{% highlight bash %}
+db.db_name.ensureIndex({property1 : 1}, {sparse : true})
+{% endhighlight %}
+
+<h2>Voir les indexes</h2>
+{% highlight bash %}
+db.vehicules.getIndexes()
+{% endhighlight %}
+
+<h2>Reconstruire les index</h2>
+{% highlight bash %}
+db.vehicules.reIndex()
+{% endhighlight %}
+
+<h2>Chercher des documents</h2>
+{% highlight bash %}
+db.user.find({activity: "t_rate"});
+{% endhighlight %}
+<h2>Chercher un document qui ne contient pas</h2>
+{% highlight bash %}
+db.user_activity.find({activity: {$nin: ["t_watch", "t_bookmark", "t_account", "t_rate"]}}).count();
+{% endhighlight %}
+<h2>Compter le nombre de document</h2>
+{% highlight bash %}
+db.user.find({activity: "t_rate"});
+{% endhighlight %}
+<h2>Timestamp to MapReduce a portion</h2>
+{% highlight bash %}
+two_weeks_ago = new Date(Date.now() - 60 * 60 * 24 * 14 * 1000);
+db.pageviews.mapReduce(map, reduce, {out: pageview_results, query: {date: {'$gt': two_weeks_ago}}});
+{% endhighlight %}
+
+<h2>Extraire des données dans un fichier</h2>
+Préparer sa requette : 
+  
+{% highlight bash %}
+  cursor = db.users.find();
+  while(cursor.hasNext()){
+      printjson(cursor.next());
+      }
+{% endhighlight %}
+
+Puis
+{% highlight bash %}
+mongo --quiet req.js > res.txt
+{% endhighlight %}

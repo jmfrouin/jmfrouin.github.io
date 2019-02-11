@@ -1,6 +1,6 @@
 ---
-title: Welcome
-comments: false
+title: Logiciels
+permalink: /logiciels/
 ---
 <h1>Software / Source code</h1>
 <a href="/baseconvertor/">BaseConvertor 1.00 C# &amp; Silverlight 2011</a><br/>
@@ -19,12 +19,3 @@ comments: false
 <a href="/syatzee">SYatzee C++ / GDI 2004</a><br/>
 <a href="/yatzee2">Yatzee 2.X for Windows 8.X / 10</a><br/>
 <a href="/yatzee">Yatzee 2.00 C# &amp; .Net 2011</a><br/>
-<h1>Articles</h1>
-<div class="row">
-  {% assign count = '0' %}
-  {% for post in site.posts %}
-        {% capture count %}{{ count | plus: '1' }}{% endcapture %}
-        {{ count }} - <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> 
-        (<span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>)<br/>
-  {% endfor %}
-</div>

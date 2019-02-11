@@ -1,0 +1,25 @@
+---
+layout: post
+status: publish
+published: true
+title: Les raccourcis de vimdiff
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-21 20:14:43 +0100'
+date_gmt: '2013-01-21 19:14:43 +0100'
+categories:
+- vim
+- home
+tags: []
+comments: []
+---
+<p><h2>Les raccourcis de vimdiff</h2>
+<!--more-->
+<p>do - Récupérer les changements de l'autre fenêtre dans la fenêtre courante.<br />
+dp - Envoyer les changements de la fenêtre courante vers l'autre fenêtre.<br />
+]c - Atteindre le prochain changement.<br />
+[c - Atteindre le changement précédent.<br />
+Ctrl W + Ctrl W - Basculer d'une fenêtre à l'autre.</p>
+<p>Simple, efficace :)</p>

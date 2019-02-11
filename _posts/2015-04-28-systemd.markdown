@@ -1,0 +1,58 @@
+---
+layout: post
+status: publish
+published: true
+permalink: systemd
+title: Memento systemd
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2015-04-28 08:15:53 +0200'
+date_gmt: '2015-04-28 07:15:53 +0200'
+categories:
+- debian
+- ubuntu
+tags: []
+comments: []
+---
+<h2>Analyse du démarrage :</h2>
+<h3>Affiche la durée du boot (en séparant le lancement du kernel et du userland)</h3>
+systemd-analyze
+systemd-analyze blame
+<h3>Affiche la durée du boot de chaque service pour en "blâmer" un</h3>
+systemd-analyze critical chain
+<h3>Affiche la durée du boot en arborescence</h3>
+systemd-analyze plot > toto.svg             
+Affiche la durée du boot de chaque service dans un graphe en svg.
+<!--more-->
+<h2>Gestion des services :</h2>
+<h3>Recharger systemd pour détecter les nouveaux services</h3>
+systemctl daemon-reload                       
+<h3>Démarrer le service</h3>
+systemctl start service 
+<h3>Arrêter le service</h3>
+systemctl stop service
+<h3>Redémarrer le service</h3>
+systemctl restart service
+<h3>Recharger le service</h3>
+systemctl reload service
+<h3>Etat du service</h3>
+systemctl status service
+<h3>Voir si un service est activé</h3>
+systemctl is-enabled service 
+<h3>Activer un service</h3>
+systemctl enable service
+<h3>Désactiver un service</h3>
+systemctl disable service
+
+<h2>Afficher des logs</h2>
+journalctl -b -p err                                 # Affiche les erreurs (-p err) du dernier boot (-b)<br />
+journalctl -b -1                                     # Affiche le journal du démarrage précédent<br />
+journalctl  --since=yesterday                # Affiche tous les événements de journal depuis hier<br />
+journalctl -f                                         # Affiche le journal en temps réel
+Arrêt & redémarrage:
+systemctl poweroff<br />
+systemctl reboot
+Have fun!
+From <a href="https://shaarli.e-loquens.fr/shaarli/?FTHKIQ" target="_blank">e-loquens</a>

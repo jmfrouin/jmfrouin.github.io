@@ -1,0 +1,94 @@
+---
+layout: post
+status: publish
+published: true
+title: Si ...
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-25 19:01:00 +0100'
+date_gmt: '2013-01-25 18:01:00 +0100'
+categories:
+- poème
+tags: []
+comments:
+- id: 631
+  author: Huguette
+  author_email: huguette@frouin.me
+  author_url: ''
+  date: '2014-04-13 10:49:22 +0200'
+  date_gmt: '2014-04-13 09:49:22 +0200'
+  content: "Paru en 1910 en Angleterre et traduit en 1918 par André Maurois sous le
+    titre \"Tu seras un homme mon fils\".\r\nVoici la version originale:\r\nIF\r\nIf
+    you can keep your head when all about you\r\n  Are losing theirs and blaming it
+    on you,\r\nIf you can trust yourself when all men doubt you,\r\n  But make allowance
+    for their doubting too;\r\nIf you can wait and not be tired by waiting,\r\n  Or
+    being lied about, don’t deal in lies,\r\nOr being hated, don’t give way to hating,\r\n
+    \ And yet don’t look too good, nor talk too wise:\r\n\r\nIf you can dream—and
+    not make dreams your master;\r\n  If you can think—and not make thoughts your
+    aim;\r\nIf you can meet with Triumph and Disaster\r\n  And treat those two impostors
+    just the same;\r\nIf you can bear to hear the truth you've spoken\r\n  Twisted
+    by knaves to make a trap for fools,\r\nOr watch the things you gave your life
+    to, broken,\r\n  And stoop and build ’em up with worn-out tools:\r\n\r\nIf you
+    can make one heap of all your winnings\r\n  And risk it on one turn of pitch-and-toss,\r\nAnd
+    lose, and start again at your beginnings\r\n  And never breathe a word about your
+    loss;\r\nIf you can force your heart and nerve and sinew\r\n  To serve your turn
+    long after they are gone,\r\nAnd so hold on when there is nothing in you\r\n  Except
+    the Will which says to them: “Hold on!”\r\n\r\nIf you can talk with crowds and
+    keep your virtue,\r\n  Or walk with Kings—nor lose the common touch,\r\nIf neither
+    foes nor loving friends can hurt you,\r\n  If all men count with you, but none
+    too much;\r\nIf you can fill the unforgiving minute\r\n  With sixty seconds’ worth
+    of distance run,\r\nYours is the Earth and everything that’s in it,\r\n  And—which
+    is more—you’ll be a Man, my son!"
+---
+<p>Je crois que c'est mon poème préféré : Si de Rudyard Kipling</p>
+<!--more-->
+<p>
+<center><br />
+Si tu peux voir détruit l'ouvrage de ta vie<br />
+Et sans dire un seul mot te mettre à rebâtir,<br />
+Ou perdre en un seul coup le gain de cent parties<br />
+Sans un geste et sans un soupir ;<br />
+Si tu peux être amant sans être fou d'amour,<br />
+Si tu peux être fort sans cesser d'être tendre,<br />
+Et, te sentant haï, sans haïr à ton tour,<br />
+Pourtant lutter et te défendre ;<br />
+</center><br />
+</p>
+<p>
+<center><br />
+Si tu peux supporter d'entendre tes paroles<br />
+Travesties par des gueux pour exciter des sots,<br />
+Et d'entendre mentir sur toi leurs bouches folles<br />
+Sans mentir toi-même d'un mot ;<br />
+Si tu peux rester digne en étant populaire,<br />
+Si tu peux rester peuple en conseillant les rois,<br />
+Et si tu peux aimer tous tes amis en frères,<br />
+Sans qu'aucun d'eux soit tout pour toi ;<br />
+</center><br />
+</p>
+<p>
+<center><br />
+Si tu sais méditer, observer et connaître,<br />
+Sans jamais devenir sceptique ou destructeur ;<br />
+Rêver, mais sans laisser ton rêve être ton maître,<br />
+Penser sans n'être que penseur ;<br />
+Si tu sais être dur, sans jamais être en rage,<br />
+Si tu sais être brave et jamais imprudent,<br />
+Si tu sais être bon, si tu sais être sage,<br />
+Sans être moral et pédant ;<br />
+</center><br />
+</p>
+<p>
+<center><br />
+Si tu peux rencontrer Triomphe après Défaite<br />
+Et recevoir ces deux menteurs d'un même front,<br />
+Si tu peux conserver ton courage et ta tête<br />
+Quand tous les autres les perdront,<br />
+Alors les Rois les Dieux la Chance et la Victoire<br />
+Seront à tout jamais tes esclaves soumis,<br />
+Et, ce qui vaut bien mieux que les Rois et la Gloire,<br />
+Tu seras un homme mon fils !<br />
+</center><br />
+</p>

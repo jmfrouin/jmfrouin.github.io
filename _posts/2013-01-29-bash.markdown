@@ -1,0 +1,138 @@
+---
+layout: post
+status: publish
+published: true
+permalink: bash
+title: bash
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-29 19:00:43 +0100'
+date_gmt: '2013-01-29 18:00:43 +0100'
+categories:
+- shell
+- bash
+tags: []
+comments: []
+---
+<h2>Configuration</h2>
+<p>Le fichier ~/.bashrc est un fichier qui est chargé à chaque exécution d'une session bash.<br />
+Il est dépendant de l'utilisateur puisque (par défaut) bash recherche ce fichier dans /home/user.</p>
+<!--more-->
+<p>Ainsi, ce fichier sert à beaucoup de choses :</p>
+<ul>
+<li>Positionner certaines variables globales de bash.</li>
+<li>Configurer le bash en lui-même (configuration du prompt, des couleurs ...)</li>
+<li>Ajout de fonctions au bash (définitions de macros, alias, fonctions)</li>
+<li>Et bien d'autres choses ...</li>
+</ul>
+<h3>Recharger le .bashrc</h3>
+<p>Une fois des modifications apportées au fichier ~/.bashrc il convient de le recharger, sans quoi les modifications ne sont pas prises en compte : source <em>~/.bashrc</em> ou . <em>~/.bashrc</em>.</p>
+<h2>Commandes bash</h2>
+<p>Correction automatique des erreurs de frappe : <em>shopt -s cdspell</em><br />
+Écriturede l'historique à la fin du fichier <em>$HISTFILE : shopt -s histappend</em><br />
+Basculer le bash en mode vi : <em>set -o vi</em> ou ajouter <em>set editing-mode vi</em> dans le fichier <em>/etc/inputrc</em> ou <em>~/.inputrc</em></p>
+<h2>Variables globales</h2>
+<p>Pour voir le contenu d'une variable globale : <em>echo \$LD_LIBRARY_PATH</em> renverra /usr/local/lib.</p>
+<h2>Liste des principales variables globales de bash</h2>
+<p>CDPATH : Liste des répertoires (séparés par : ) dans lesquels <em>cd</em> va rechercher.<br />
+DISPLAY : Serveur X géré par ssh.<br />
+EDITOR : Editeur par défaut.<br />
+UID : L'UID de l'utilsateur courant.</p>
+<h2>Redirections</h2>
+<p>Rediriger la sortie d'une commande, vers un fichier (A noter, que le fichier ls.txt, si il existe, sera écrasé.): <em>ls $&gt;$ ls.txt</em>.<br />
+Rediriger la sortie d'une commande, à la suite d'un fichier : <em>ls $&gt;&gt;$ ls.txt</em><br />
+Rediriger le flux sortant stdout dans un fichier: <em>./programme $1&gt;$ result_stdout.log</em><br />
+Rediriger le flux sortant stderr fans un fichier : <em>/programme $2&gt;$ result_stderr.log</em><br />
+Rediriger les flux sortant stderr et stdout dans un fichier (Supporté uniquement à partir de la version 4 de bash.) : <em>./programme $\&amp;&gt;$ result_stderr.log</em><br />
+Rediriger le flux sortant stderr sur stdout (Et vice-versa <em>$1&gt;\&amp;2$</em>) :<em>./programme $2&gt;\&amp;1$</em></p>
+<h2>Exporter une variable depuis un script bash</h2>
+<p>Dans un fichier test.sh :</p>
+<pre class="brush:shell">#!/bin/bash
+export CSCOPE_DB=/home/jmfrouin/cscope.out</pre>
+<h2>Scripts</h2>
+<p>Tous les scripts bash doivent commencer avec le <strong>sha-bang</strong> : #!/bin/bash</p>
+<p>De plus, ils doivent pouvoir être exécutés directement depuis le bash :</p>
+<blockquote><p>chmod u+x script.sh</p></blockquote>
+<h2>Variables spéciales</h2>
+<p>Le bash définit quelques variables ayant une signification bien précise :</p>
+<p>$0 : Nom du script.<br />
+$i ($i&gt;0$) : Contient le i^eme argument (équivalent de argv en C).<br />
+$# : Nombre d'arguments (équivalent de argc en C).<br />
+$? : Contient le code de retour de la dernière commande shell.<br />
+$@ : "$1" "$2" "$3" ...<br />
+$* : Liste de tous les paramètres séparés par un espace.<br />
+$$ : PID de l'interpréteur.<br />
+$\ : Chemin d'accès absolu.</p>
+<h2>Variables</h2>
+<p>Il est possible d'utiliser des variables dans les scripts bash.</p>
+<p>Pour définir une variable, on utilise le signe =:</p>
+<pre class="brush:shell">
+variable=14
+variable='Test'
+</pre>
+<p>Pour y accéder plus tard, il suffit d'utiliser:</p>
+<pre class="brush:shell">
+echo ${variable}
+</pre>
+<h2>Tableaux</h2>
+<p>Il est possible d'utiliser des tableaux dans les scripts bash.</p>
+<pre class="brush:shell">
+variable[0]=14
+variable[1]='Test'
+</pre>
+<p>Pour y accéder plus tard, il suffit d'utiliser:</p>
+<pre class="brush:shell">
+echo ${variable[0]}
+echo ${variable[*]}
+</pre>
+<p>On remarque qu'il est donc possible de créer des tableaux de variables mixtes (nombres, chaînes de caractères ...).</p>
+<h2>Chaînes de caractères</h2>
+<p>Chaîne de caractères sans interprétation : ’.<br />
+Chaîne de caractères sans interprétation, sauf de `, \$ et \\ : ".<br />
+Pour toutes les fonctions ci dessous, string=abcABC123ABCabc</p>
+<h3>Longueur</h3>
+<p>Équivalent de la fonction strlen en C:</p>
+<pre class="brush:shell">
+echo ${#string} # renverra 15
+</pre>
+<h3>Sous Chaine</h3>
+<pre class="brush:shell">
+echo ${string:7:3} # 23A
+</pre>
+<h2>Commandes composées</h2>
+<pre class="brush:shell">for nom [ in mot ] ; do liste ; done
+for (( expr1 ; expr2 ; expr3 )) ; do liste ; done
+select nom [ in mot ] ; do liste ; done
+case mot in [ [(] motif [ | motif ] ... ) liste ;; ] ... esac
+if liste; then liste; [ elif liste; then liste; ] ... [ else liste; ] fi
+while liste; do liste; done
+until liste; do liste; done</pre>
+<h2>Tests</h2>
+<pre class="brush:shell">test -a fichier ou [ -a fichier ]</pre>
+<p>-a fichier : Vrai si le fichier existe.<br />
+-b fichier : Vrai si le fichier existe et est un fichier spécial bloc.<br />
+-c fichier : Vrai si le fichier existe et est un fichier spécial caractère.<br />
+-d fichier : Vrai si le fichier existe et est un répertoire.<br />
+-e fichier : Vrai si le fichier existe.<br />
+-f fichier : Vrai si le fichier existe et est un fichier normal.<br />
+-g fichier : Vrai si le fichier existe et a son bit Set-GID de mis.<br />
+-h fichier : Vrai si le fichier existe et est un lien symbolique.<br />
+-k fichier : Vrai si le fichier existe et a son bit « sticky » de mis.<br />
+-p fichier : Vrai si le fichier existe et est un tube nommé (FIFO).<br />
+-r fichier : Vrai si le fichier existe et est accessible en lecture.<br />
+-s fichier : Vrai si le fichier existe et a une taille strictement positive.<br />
+-t fd : Vrai si fd est ouvert sur un terminal.<br />
+-u fichier : Vrai si le fichier existe et a son bit Set-UID de mis.<br />
+-w fichier : Vrai si le fichier existe et est accessible en écriture.<br />
+-x fichier : Vrai si le fichier existe et est exécutable.<br />
+-O fichier : Vrai si le fichier existe et appartient à l’UID effectif de l’utilisateur.<br />
+-G fichier : Vrai si le fichier existe et appartient au GID effectif du groupe.<br />
+-L fichier : Vrai si le fichier existe et est un lien symbolique.<br />
+-S fichier : Vrai si le fichier existe et est une « socket ».<br />
+-N fichier : Vrai si le fichier existe et a été modifié depuis sa dernière lecture.<br />
+fichier_1 -nt fichier_2 : Vrai si le fichier_1 est plus récent que le fichier_2 (selon les dates de dernière modification) ou si fichier_1 existe et non fichier_2.<br />
+fichier_1 -ot fichier_2 : Vrai si le fichier_1 est plus vieux que le fichier_2 ou si fichier_2 existe et non pas fichier_1.<br />
+fichier_1 -ef fichier_2 : Vrai si le fichier_1 et le fichier_2 se réfèrent au même périphérique et ont les mêmes numéros d’i-n.</p>
+<p><a href="http://tldp.org/LDP/abs/html/string-manipulation.html" target="_blank">String Manipulation</a></p>

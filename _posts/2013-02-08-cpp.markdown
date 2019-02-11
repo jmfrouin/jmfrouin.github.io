@@ -1,0 +1,744 @@
+---
+layout: post
+status: publish
+published: true
+permalink: cpp
+title: C++
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-02-08 18:56:51 +0100'
+date_gmt: '2013-02-08 17:56:51 +0100'
+categories:
+- cpp
+- home
+tags: []
+comments: []
+---
+<h2>Classe</h2>
+<p>Une classe définie un objet. Une classe est semblable à une <em>struct</em> du C. Sans spécification, par l'opérateur de portée, toutes ses données et fonctions (que l'on appelle méthodes) sont privées. Par défaut, elles sont publiques dans une <em>struct</em>.</p>
+<!--more-->
+<p>Voici la définition d'une classe CClasse:</p>
+<pre class="brush:cpp">#include &lt;iostream&gt;
+
+class CClasse
+{
+  public:
+    //Constructeur
+    CClasse(int a = 3);
+
+    //Constructeur par copie
+    CClasse(CClasse&amp; a, int b = 0);
+
+    //Destructeur
+    ~CClasse() { }
+
+  public:
+    void Methode1(int a = 10)
+    {
+      std::cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; std::endl;
+    }
+
+    void Methode1(int a, int b = 5)
+    {
+      std::cout &lt;&lt; "a = " &lt;&lt; a &lt;&lt; " et b = " &lt;&lt; b &lt;&lt; std::endl;
+    }
+};
+
+int main()
+{
+  CClasse A;
+  CClasse* B = &amp;A;
+  A.Methode1(2.0);
+  A.Methode1(2.0, 2.0);
+  B-&gt;Methode1(2.0, 2.0);
+  return EXIT_SUCCESS;
+}</pre>
+<p>Pour pouvoir accéder à une méthode d'une classe il faut utiliser soit . (ligne 31) si on manipule un objet, sinon -&gt; (ligne 32) si on manipule un pointeur sur l'objet.</p>
+<p>L'initialisation (L'initialisation des données membres se fait dans l'<strong>ordre de déclaration des données membres</strong>. et non dans l'ordre où on les initialise) des données membres d'une classe peut se faire de deux façons dans le constructeur:</p>
+<pre class="brush:cpp">CClasse::CClasse()
+{
+mA = 4;
+mB = 5;
+}</pre>
+<pre class="brush:cpp">CClasse::CClasse():
+mA(4),mB(5)
+{
+
+}</pre>
+<h2>Enumération</h2>
+<p>Les énumérations permettent de créer une entité à partir d'un ensemble de valeurs numériques.</p>
+<pre class="brush:cpp">enum ECodesErreurs
+{
+  eOK, // = 0
+  eKO, // = 1
+  eNA = 18, // = 18
+  eN2, // = 19
+  eN3 = 69, // = 69
+};</pre>
+<h2>Méthodes</h2>
+<h3>Définition</h3>
+<p>Toutes les fonctions d'une classe s'appellent des méthodes. Il est possible de redéfinir le comportement d'une méthode dans une classe dérivée, si dans la classe de base, la méthode à été définie avec le mot clef <em>virtual</em> (Quand une méthode est surchargée, le comportement de base n'est plus accessible à la classe fille, et donc il faut surcharger toutes les méthodes virtuelles). La signature (Nombre de paramètres et valeur de retour d'une méthode) doit être la même. On peut toutefois modifier le type de la valeur retour, si celui ci hérite du type de base.</p>
+<p>Il est possible de déclarer plusieurs fois la même méthode (même nom), si il est possible (au compilateur) de les différencier (En clair, si leur signatures est différentes !). Le compilateur ne peut pas deviner ce que l'on veut faire.</p>
+<p>C'est pourquoi il n'est pas possible de différencier deux méthodes portant le même nom par leur valeur de retour, mais on peut les différencier grâce à leur arguments.</p>
+<p>Ainsi dans CClasse, deux méthodes <em>Methode1</em> sont déclarées (et définies). Chacune de ces méthodes prises individuellement est valide, mais dans le contexte il va y avoir un soucis.</p>
+<p>En effet lors de l'appel de <em>Methode1(2.0)</em> à la ligne 24, la compilateur ne saura pas si il doit utiliser <em>Methode1(a=2) ou Methode1(a=2, b=5)</em> et donc ne compilera pas le source. Donc il faut veillez à ne pas produire ce genre d’ambiguïté.</p>
+<p>Un autre avantage, est que le compilateur peut caster les paramètres. Ainsi à la ligne 25, le compilateur castera 2.0 en 2. Il préviendra tout de même, grâce à un warning, du cast qu'il s'est permis de faire.</p>
+<p>Sans modification du code, la première déclaration ne pourra jamais être atteinte car elle est ambigüe.</p>
+<p>Le résultat de l’exécution de ce programme : <em>a = 2</em> et <em>b = 2</em>.</p>
+<h3>Arguments</h3>
+<p>Les arguments d'une méthode peuvent avoir des valeurs par défaut.</p>
+<pre class="brush:cpp">CClasse(int a = 0);</pre>
+<p>Dans ce cas si l'on créé un objet <em>A</em> ainsi : CClasse A, a vaudra 0. Si on le créé ainsi : CClasse A(5), alors a vaudra 5.</p>
+<h3>Méthode abstraite</h3>
+<p>Une méthode peut être <em>virtuelle pure</em>:</p>
+<pre class="brush:cpp">virtual Methode() = 0;</pre>
+<p>Dans ce cas elle n'a pas de comportement défini. Son comportement devra être implémenté dans la classe qui en dérive. Les méthodes virtuelles pures sont souvent utilisées dans les interfaces. (Classe abstraite servant à la dérivation, il faut voir les interfaces comme des patrons pour écrire des classes plus complexes)</p>
+<p>Dans une classe, deux méthodes sont assez particulières : le constructeur et le destructeur.</p>
+<h2>Constructeur</h2>
+<p>Le constructeur (qui n'est pas forcement public), ici CClasse(), est la première méthode qui sera appelée lors de la création de l'objet CClasse. <strong>Un constructeur n'a pas de valeur de retour</strong>.</p>
+<p>Un constructeur peut prendre autant de paramètres qu'il le nécessite, mais ne doit pas avoir de paramètre de type classe (dont il fait partie), sinon cela spécialise le constructeur en constructeur par copie. Dans ce cas, touts les paramètres doivent avoir une valeur par défaut.</p>
+<p>Un autre usage peut être fait du constructeur, il peut servir de convertisseur implicite. Par exemple <em>CClasse(double d)</em> sera un convertisseur implicite permettant de convertir n'importe quel double en CClasse. Pour que la conversion implicite n'est pas lieu il faut utiliser le mot clé <em>explicit</em> il est conseillé de déclarer tous les constructeurs possédant un seul argument (donc potentiellement convertisseur de type) avec le mot clé <em>explicit</em> pour éviter tout malentendu. Bien entendu, le constructeur par copie est l'exception qui confirme la règle (En fait le constructeur par copie possède un autre rôle et donc n'a pas besoin d'être déclaré explicitement).}. On l'utilise ainsi : <em>CClasse Tmp = 20.0</em> (Dans ce cas le symbole =, n'est pas l'opérateur d'affectation mais bel et bien le constructeur implicite de conversion d'un double en CClasse).<br />
+Un constructeur peut lever des exceptions.<br />
+Il est possible d'avoir plusieurs constructeur par défaut dans une même classe.</p>
+<h2>Destructeur</h2>
+<p>Le destructeur est la dernière méthode qui sera appelée avant la destruction de l'objet. Il est donc important de regrouper dans le destructeur tout les mécanismes de libération de la mémoire. <strong>Un destructeur n'a pas de valeur de retour ni de paramètre</strong>. Il ne doit pas lever d'exception. Un destructeur d'une classe de base devra toujours être déclaré comme virtuel. Car si une classe est détruite en ce servant d'un pointeur sur une classe de base, et que le destructeur de cette classe de base n'est pas virtuel, alors le destructeur de la classe que l'on détruit ne sera pas appelé.</p>
+<h2>Espace de nom</h2>
+<h3>Introduction</h3>
+<p>L'espace de nom permet de définir plusieurs classes, définitions, énumérations ... portant le même nom mais dont la portée est différente. Il est possible de signaler que l'on souhaite utiliser un espace de nom bien précis en utilisant <em>using namespace nom</em> (Il convient d'utiliser <em>using namespace</em> <strong>après</strong> toutes les inclusions de fichiers (pour éviter que la directive n'affecte les objets) d'en-tête).</p>
+<pre class="brush:cpp">\begin{lstlisting}[language=c++]
+namespace Outils
+{
+class A;
+}
+
+namespace Divers
+{
+class A;
+}</pre>
+<p>Ainsi on a définit deux classes bien distinctes mais qui porte le même nom. Pour pouvoir y accéder il faut utiliser l'opérateur de résolution de porté <em>Outils::A</em> et <em>Divers::A</em>.</p>
+<h3>Espace de nom anynome</h3>
+<pre class="brush:cpp">namespace
+{
+}</pre>
+<h3>Remarques</h3>
+<p>Il ne faut pas déclarer d'objet statique (donc avec le mot clé <em>static</em>) à l'intérieur d'un espace de nommage. A la place il faut déclarer ces objets dans l'espace de nom anonyme.</p>
+<h2>Héritage</h2>
+<p>On dit qu'une classe B hérite d'une classe A, si B est définie ainsi :</p>
+<pre class="brush:cpp">class B : public A
+{
+...
+};</pre>
+<p>Là, encore, la portée est importante bien que rarement autre que public (on se sert de la portée des données membres en général).</p>
+<h2>Portée</h2>
+<p>Dans l'exemple CClasse on constate qu'une méthode ou une donnée membre peut être soit <em>public</em>, dans ce cas n'importe qui y a accès, soit <em>protected</em>, auquel cas seules la classe elle même et ces classes filles y auront accès, soit private, dans ce dernier cas seule la classe elle même y a accès.</p>
+<p>Ainsi, A1() ne sera accessible que par A et ses filles. A2() par A uniquement. Tandis que la donnée membre m_A sera accessible par tout le monde.</p>
+<h2>Instruction de branchement</h2>
+<p>Ne jamais modifier la variable de contrôle d'une instruction de branchement sous peine de tomber dans une boucle infinie :</p>
+<pre class="brush:cpp">for(int i=0; i!=8; ++i)
+{
+  ++i; //A banir du code !
+}</pre>
+<h3>switch</h3>
+<p>Ne pas oublier le break !</p>
+<pre class="brush:cpp">switch(cond)
+{
+  case 0:
+  case 1:
+    break;
+  default:
+    break;
+}</pre>
+<h2>Classe abstraire</h2>
+<p>Une classe abstraite (Pour rendre le code plus lisible il peut être intéressant de rendre les constructeurs d'une classe abstraite privés.) est une classe qui possède au moins une méthode virtuelle pure. Donc une méthode définie ainsi : <em>virtual void Methode() = 0;</em>. Les classes abstraites ne peuvent pas être instanciées et ne servent que de classe de base, pour l'héritage ou le polymorphisme.</p>
+<p>Une méthode virtuelle pure devra être implémentée par la classe fille.</p>
+<h2>Cohabitation C/C++</h2>
+<h3>Convertir une std::string en char*</h3>
+<pre class="brush:cpp">std::string chaine;
+chaine.c_str();</pre>
+<h3>Mangling des fonctions C en C++</h3>
+<pre class="brush:cpp">#ifdef __cplusplus
+extern C {
+#endif
+
+function();
+...
+
+#ifdef __cplusplus
+}
+#endif</pre>
+<h2>Démangling</h2>
+<p>Un petit programme bien pratique, permet de demangler les noms des méthodes du C++ : <em>c++filt</em>.</p>
+<h2>Données et méthodes statiques</h2>
+<p>Il est possible de définir des données membres ou des méthodes comme <em>static</em>. Une donnée membre statique aura toujours la même valeur dans toutes les instances d'une classe qui l'encapsule. Les méthodes déclarées <em>static</em> ne pourront manipuler que des données statiques et pourront être appelées sans qu'une instance de la classe soit instanciée.</p>
+<pre class="brush:cpp">class CClasse
+{
+  static CClasse* mInst;
+};</pre>
+<p>Toutes données membres déclarées static devront faire l'objet d'une instanciation hors de la déclaration (même mInst qui est private):</p>
+<pre class="brush:cpp">CClasse* CClasse::mInst = 0;</pre>
+<h2>Modificateurs d'Entrée/Sortie</h2>
+<p>std::boolalpha : Active le format binaire.<br />
+std::dec : Active le format décimal.<br />
+std::endl : Fin de ligne.<br />
+std::ends : Ajout le caractère nul.<br />
+std::flush : Vide le tampon.<br />
+std::hex : Active le format hexadécimal.<br />
+std::left : Alignement à gauche.<br />
+std::oct : Active le format octal.<br />
+std::noboolalpha : Désactive le format binaire.<br />
+std::noshowbase : N'affiche plus le format utilisé.<br />
+std::noshowpoint : N'affiche pas la virgule.<br />
+std::right : Alignement à droite.<br />
+std::showbase : Affiche le format utilisé (hex : 0x,dec ou oct : 0).<br />
+std::showpoint : Affiche la virgule.</p>
+<h2>Exceptions</h2>
+<p>Pour pouvoir améliorer le suivi de la vie d'une application C++, il est important d'avoir un gestionnaire d'exceptions. Ce gestionnaire d'exception fourni la pile d'appel lorsqu'une exception est détectée. Il n'est pas terminé pour le moment.</p>
+<pre class="brush:cpp">#include &lt;execinfo.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;iostream&gt;
+#include &lt;exception&gt;
+
+class CException: public std::exception
+{
+  public:
+    CException(const std::string&amp; File, const std::string&amp; Line)
+    {
+      mFile = File;
+      mLine = Line;
+    }
+    virtual const char* what() const throw()
+    {
+      std::cout &lt;&lt; "CException" &lt;&lt; '\n';
+      std::cout &lt;&lt; "File : " &lt;&lt; mFile &lt;&lt; ", Line " &lt;&lt; mLine &lt;&lt; '\n';
+      std::cout &lt;&lt; "Call stack : " &lt;&lt; '\n';
+      displayStack();
+      return "CException";
+    }
+  private:
+    void displayStack()
+    {
+      void* array[10];
+      sizet size;
+      char **strings;
+      size = backtrace(array, 10);
+      strings = backtracesymbols(array, size);
+
+      for(sizet i = 0; i &lt; size; ++i)
+      {
+        std::cout &lt;&lt; strings[i] &lt;&lt; '\n';
+      }
+      free(strings);
+    }
+  private:
+    std::string mFile;
+    std::string Line;
+}MyEx;
+
+int main()
+{
+  try
+  {
+    throw MyEx(FILE, LINE);
+  }
+  catch(std::exception&amp; e)
+  {
+    std::cout &lt;&lt; e.what() &lt;&lt; std::endl;
+  }
+
+  return EXITFAILURE;
+}</pre>
+<h2>Héritage multiple</h2>
+<p>Soit A une classe de base, comportant une méthode <em>Affiche()</em>. B et C, deux classes, héritent de A. Enfin D, une classe qui hérite à la fois de B et de C. D implémente donc le concept de multihéritage.</p>
+<p>Maintenant que ce passe t'il si on instancie une classe D et que l'on essaie d'accéder à la méthode <em>Affiche()</em>, pour ce faire écrivons les choses en C++:</p>
+<pre class="brush:cpp">#include 
+
+class A
+{
+  public:
+    void Affiche()
+    {
+      std::cout &lt;&lt; this &lt;&lt; std::endl;
+    }
+};
+
+class B : public A
+{
+};
+
+class C : public A
+{
+};
+
+class D : public C, public B
+{
+};
+
+int main()
+{
+  D D1;
+  D1.Affiche();
+  return EXIT_SUCCESS;
+}</pre>
+<p>Et bien, lors de la compilation, il y aura un gros problème :</p>
+<pre class="brush:shell">heritage_multiple_1.cpp: In function 'int main()':
+heritage_multiple_1.cpp:27: error: request for member 'affiche' is ambiguous
+heritage_multiple_1.cpp:6: error: candidates are: void A::affiche()
+heritage_multiple_1.cpp:6: error: void A::affiche()</pre>
+<p>Comme le dit le message d'erreur : c'est ambigu.<br />
+En effet, D hérite de B et de C. Donc lors de l'instanciation de D, deux classes, B et C, seront créées en mémoire, ainsi que 2 classes A (une pour B et une pour C). Du coup quand D voudra appeler <em>Affiche()</em> le compilateur ne saura pas si il s'agit de la méthode de la classe A instanciée par B ou de la classe A instanciée par C.</p>
+<p>On aura, donc, le schéma suivant en mémoire :</p>
+<pre>
+    A
+   /  \
+  /    \
+ /      \
+B        C
+ \      /
+  \    /
+   \  /
+     D
+</pre>
+<p>Si c'est bien le schéma que l'on veut reproduire, il faut utiliser l'opérateur de résolution de portée pour résoudre le problème : <em>D1.B::Affiche()</em>.</p>
+<p>Si par contre le schéma mémoire attendu est celui-ci :</p>
+<pre>
+A        A
+|        |
+|        |
+|        |
+B        C
+ \      /
+  \    /
+   \  /
+     D
+</pre>
+<p>Alors il faudra utiliser le mot clef <em>virtual</em> pour décrire l'héritage de B et de C. Cela donne :</p>
+<pre class="brush:cpp">#include 
+
+class A
+{
+  public:
+    void Affiche()
+    {
+      std::cout &lt;&lt; this &lt;&lt; std::endl;
+    }
+};
+
+class B : virtual public A
+{
+};
+
+class C : virtual public A
+{
+};
+
+class D : public C, public B
+{
+};
+
+int main()
+{
+  D D1;
+  D1.Affiche();
+  return EXIT_SUCCESS;
+}</pre>
+<h2>Macros</h2>
+<h3>Colorer la sortie standard ou erreur sous bash</h3>
+<p>Il suffit d'inclure dans le code :</p>
+<pre class="brush:cpp">#define VERT "\e[0;32m"
+#define ROUGE "\e[0;31m"
+#define BLEU "\e[0;34m"
+#define VIOLET "\e[0;35m"
+#define CYAN "\e[0;36m"
+#define STOP "\e[0m"</pre>
+<p>Puis pour l'utiliser (STOP permet d'annuler la coloration, sans quoi les futurs std$::$cout seraient aussi colorés) :</p>
+<pre class="brush:cpp">std::cout &lt;&lt; '\n' &lt;&lt; VERT &lt;&lt; "Command Line Interface " &lt;&lt; VER &lt;&lt; STOP &lt;&lt; '\n';
+std::cout &lt;&lt; ROUGE &lt;&lt; "Erreur : Pointeur == 0" &lt;&lt; STOP &lt;&lt; '\n';</pre>
+<h2>Convertir un code d'erreur en chaine</h2>
+<pre class="brush:cpp">#include
+
+typedef enum
+{
+eOK = 0,
+eNOK,
+}Return_Code;
+
+#define t(u) #u
+
+int main()
+{
+std::cout &lt;&lt; t(eOK) &lt;&lt; std::endl;
+return 0;
+}</pre>
+<h2>Définir un numéro de version complet</h2>
+<p>Pour pouvoir gérer simplement un numéro de version complet, donc composé d'un numéro de version majeure (evolution majeure), de version mineure (ajout de fonctionnalité) et d'un numéro de bug (correction des bugs découvert dans l'application). Gràce à cette ensemble de macro il est possible de maintenir facilement le numéro de version de plusieurs composants.</p>
+<pre class="brush:cpp">#define MAJOR 0
+#define MINOR 1
+#define BUG 1
+#define t(u) #u
+#define VERSION(M,m,b) t(M) "." t(m) "." t(b)
+#define VER VERSION(MAJOR,MINOR,BUG)</pre>
+<h2>Operateurs de cast</h2>
+<h3>const_cast</h3>
+<p>Permet d'ajouter ou de supprimer : <strong>const</strong> ou <strong>volatile</strong>.</p>
+<h3>reinterpret_cast</h3>
+<p>Pointeur permettant de convertir un pointeur vers n'importe quel autre type.</p>
+<h3>dynamic_cast</h3>
+<p>L'opérateur <em>dynamic_cast</em> converti un pointeur sur une classe mère en un pointeur sur classe fille dans la même chaine d'héritage. De plus l'opérateur <em>dynamic_cast</em> ne fonctione qu'avec des objets polymorphiques (dont une des méthodes est virtuelle).</p>
+<p>Cast d'un pointeur (APtr) sur un objet A, en un pointeur sur un objet B (B hérite de A) :</p>
+<pre class="brush:cpp">dynamic_cast&lt;B*&gt;(APtr);</pre>
+<p>De plus, il faut savoir que le compilateur:</p>
+<p>Vérifie que le pointeur (ou la référence) que l'on essaie de caster avec l'opérateur <em>dynamic_cast</em> est bien un pointeur sur un objet polymorphique.</p>
+<p>Si tel n'est pas le cas, ou si il échoue, il renvoie un pointeur nul ou lève une exception <em>bad_cast</em>.</p>
+<p>Pour tester si une plateforme supporte le <em>dynamic_cast</em> on peut utiliser le code suivant :</p>
+<pre class="brush:cpp">#include 
+
+class A
+{
+  public:
+    virtual ~A(){}
+};
+
+class B : public A
+{
+  public:
+    B():
+    mA(9)
+    {
+    }
+    void BB()
+    {
+      std::cout &lt;&lt; "Youpi" &lt;&lt; mA &lt;&lt; std::endl;
+    }
+  public:
+    int mA;
+};
+
+int main()
+{
+  A* A0;
+  A0 = new B;
+  dynamic_cast&lt;B*&gt;(A0)-&gt;BB();
+  delete A0;
+  return EXIT_SUCCESS;
+}</pre>
+<h3>static_cast</h3>
+<p>Fonctionne comme dynamic_cast sauf qu'il peut être utilisé avec des objets non polymorphiques. En conséquence, le compilateur n'éffectue pas les tests de contrôle.</p>
+<h2>Operateur new</h2>
+<h3>Introduction</h3>
+<p>Dans la norme C++, page 47, on lit :</p>
+<blockquote><p>Even if the size of the space requested is zero, the request can fail. If the request succeeds, the value returned shall be a non null<br />
+pointer value (4.10) p0 different from any previously returned value p1, unless that value p1 was subsequently<br />
+passed to an operator delete. The effect of dereferencing a pointer returned as a request for<br />
+zero size is undefined. (The intent is to have operator new() implementable by calling malloc() or calloc(), so the rules are substantially the<br />
+same. C + + differs from C in requiring a zero request to return a non-null pointer.)</p></blockquote>
+<p>Ainsi, lorsque new ne peut pas allouer un objet il lève l'exception bad_alloc.</p>
+<h3>Surcharge</h3>
+<p>Si l'on souhaite que new renvoie NULL en cas de problème mémoire il faut surcharger l'opérateur :</p>
+<pre class="brush:cpp">struct nothrow_t {};
+extern const nothrow_t nothrow;
+void *operator new throw() (size_t, const nothrow_t&amp;);</pre>
+<p>Un <a href="http://www.scs.cs.nyu.edu/~dm/c++-new.html" target="_blank">bon article</a> sur l'opérateur new, contenant notamment sa surcharge pour qu'il renvoie NULL entre autre.</p>
+<h3>std::nothrow</h3>
+<p>On peut aussi désactiver les exceptions sur new :</p>
+<pre class="brush:cpp">int *adr = new(std::nothrow) int [taille];</pre>
+<p>Lors d'un échec dans l'allocation memoire il renverra, dans ce cas, un pointeur nul.</p>
+<h3>set_new_handler</h3>
+<p>On peut aussi utiliser cette instruction pour definir une methode qui sera appelée en cas d'echec d'allocation de l'espace memoire par l'operateur new.<br />
+Il nécessite l'inclusion de $&lt;$new$&gt;$.</p>
+<pre class="brush:cpp">void depasse();
+set_new_handler(depasse);</pre>
+<h2>Patron de classe</h2>
+<h3>Introduction</h3>
+<p>Un patron de classe, est en fait une classe générique. Générique en ce sens, qu'elle peut posséder des données membres d'un type inconnu. Elle peut aussi retourner un type encore inconnu lors de l'écriture du patron. Un patron de classe ne possède pas de corps (pas de .cpp donc) et ce présente donc sous la forme d'un fichier de en tête (donc .h). En effet le compilateur ne peut pas compiler quelque chose qu'il ne connait pas. En fait, les types inconnus que l'on manipule seront connus au moment de la pré-compilation, et donc de la compilation. (Puisque, à ce moment là, le compilateur à conscience de l'intégralité du programme)</p>
+<p>On peut aussi séparer la déclaration d'un template de sa définition. (mais en incluant le fichier de définition à la fin de l'en tête.). Dans ce cas, le corps portera l'extension .tpl. (Convention)</p>
+<pre class="brush:cpp">#ifndef __PATRON__
+#define __PATRON__
+
+#include "PATRON.tpl"
+
+#endif //__PATRON__</pre>
+<p>Du coup pour l'utilisateur du patron, il suffit de faire un include de l'en tête de la classe.</p>
+<p>Il y a quand même un premier effet de bord, dû à cette souplesse, le fait que lors de la pré-compilation le compilateur "comble" les trous ,en remplacant un type inconnu par un type connu, il le fait dans un en tête. On se retrouve bien vite avec beaucoup de code binaire en trop (ou alors beaucoup de symboles inutiles) ce qui est peut être critique pour des projets embarqués.</p>
+<h3>Patron simple</h3>
+<p>Pour écrire un patron, on utilise template:</p>
+<pre class="brush:cpp">template
+class MonPatron
+{
+T Ajoute()
+{
+return mNb+1;
+}
+private:
+T mNb;
+}</pre>
+<p>Ici, on a écrit une classe MonPatron, qui possède une donnée membre de type inconnu, et une méthode qui retourne un type inconnu que l'on nomme T pour plus de simplicité.</p>
+<h2>Pointeurs intélligents</h2>
+<h3>Introduction</h3>
+<p>Les smarts pointeurs, sont des objets au sens C++ qui fonctionne comme des pointeurs standards, sauf qu'ils implémentent de nouvelles fonctionnalités, comme par exemple l'éffacement de l'objet pointé.</p>
+<p>Deux types de pointeurs intélligents peuvent être distingués, les scopes pointeurs qui sont des pointeurs qui détruisent l'objet pointé une fois sorti de la portée, et les shared pointeurs qui gardent à jour un compteur de référence sur l'objet pointé.</p>
+<h3>auto_ptr</h3>
+<p>La STL implémente une classe auto_ptr, pour pouvoir l'utiliser il faut inclure l'en-tête <em>memory</em> : <em>auto_ptr$&lt;$class T$&gt;$ nom;</em></p>
+<p>Voyons comment l'auto_ptr fonctionne :</p>
+<p>Sans :</p>
+<pre class="brush:cpp">CClasse* tmp = new CClasse; 
+tmp$\rightarrow$Methode();
+delete tmp;</pre>
+<p>Avec :</p>
+<pre class="brush:cpp">#include $&lt;$memory$&gt;$
+auto\_ptr$&lt;$CClasse$&gt;$ tmp(new CClasse);
+tmp$\rightarrow$Methode();</pre>
+<p>Les deux codes font strictement la même chose, mais d'une manière plus "simple" avec les auto pointeurs, car le développeur n'a plus à ce soucier de la destruction des objets.</p>
+<h3>Smart pointeur utilisé comme dumb pointeur</h3>
+<p>Pour pouvoir fonctionner toutes les classes qui seront manipulées par les CSmartPtr devront dériver d'une classe CSmartCpt. La classe CSmartCpt permet juste d'assigner un compteur à un objet.</p>
+<p>On agrège, ainsi, directement le compteur à l'objet pointé. Cela permet, entre autre, d'éviter de fragmenter la mémoire.</p>
+<p>L'implémentation d'un smart pointeur est d'autant plus simplifiée qu'elle ne gère pas de compteur en interne :</p>
+<pre class="brush:cpp">#ifndef __SMART_POINTER__
+#define __SMART_POINTER__
+
+#include 
+
+#if defined LEAKS
+#include &lt;leak_detector.h&gt;
+#endif
+
+typedef unsigned int SmartCptType;
+
+/*!
+ * @brief Simple counter used by Smart pointer.
+ */
+class CSmartCpt
+{
+  public:
+    CSmartCpt(): mCounter(0) {}
+    virtual ~CSmartCpt() {}
+
+    SmartCptType _incRef() { return ++mCounter; }
+    SmartCptType _decRef() { return --mCounter; }
+
+  private:
+    SmartCptType mCounter;       ///&lt; Reference counter.
+};
+
+/*!
+ * @brief Pointer which can handle multireference.
+ * This smart pointer erase the object only when nobody use it anymore by maintaining a reference counter.
+ * Be careful : This implementation is written for SAPI project and is not yet fully implemented.
+ * For the moment, this smart pointer doesn't support array object.
+ */
+template 
+class TSmartPtr
+{
+  public:
+    TSmartPtr(): mObject(0) {}
+    ~TSmartPtr() { *this = 0; }
+
+    TSmartPtr&amp; operator=(T* object)
+    {
+      if(object) object-&gt;_incRef();
+
+      if(mObject)
+      {
+        SmartCptType Cpt;
+        Cpt = mObject-&gt;_decRef();
+        if(Cpt == 0) delete mObject;
+      }
+      mObject = object;
+      return *this;
+    }
+
+    TSmartPtr&amp; operator=(TSmartPtr&amp; object)
+    {
+      *this = object.mObject;
+      return *this;
+    }
+
+    //In order to use it, as a dumb pointer.
+    operator T*() { return mObject; }
+
+    bool operator==(const int&amp; value) const
+    {
+      return ((int)this == value);
+    }
+
+    bool operator!=(const int&amp; value) const
+    {
+      return ((int)this != value);
+    }
+
+    //Dereferencement operators for object.
+    T&amp; operator*() { return *mObject; }
+
+    //Dereferencement operators for pointer on object.
+    T* operator-&gt;() { return mObject; }
+
+  private:
+    T* mObject; ///&lt; Object handle by this pointer.
+};
+#endif //__SMART_POINTER__</pre>
+<h3>Shared pointer</h3>
+<p>Pointent sur un objet en ce servant d'un compteur (incrémenté) à chaque fois que l'on pointe sur l'objet. Ainsi lorsque ce pointeur vaut 0 l'objet peut être effacé.</p>
+<h3>Scope pointer</h3>
+<p>Detruisent les objets sur lesquels ils pointent lors de leur destructions.</p>
+<h3>RTI : RunTime Informations</h3>
+<p>Les informations RTI, sont des informations disponible lors de la compilation et fournies par le compilateur.</p>
+<p>On peut ainsi, récupérer le type d'un objet (ou d'un type) avec : <em>const type_info &amp;Type = typeid(A)</em> en supposant que A à été déclaré précédemment.</p>
+<h2>Singleton</h2>
+<h3>Introduction</h3>
+<p>Un singleton est un motif de conception pour décrire un objet qui n'est instancié qu'une fois en mémoire durant tout le temps d'éxécution du programme.<br />
+Le singleton est juste la façon de coder cet objet particulier.</p>
+<h3>Implémentation</h3>
+<p>Pour implémenter un singleton, on peut utiliser un pointeur statique sur l'objet:</p>
+<pre class="brush:cpp">#include 
+
+template
+class TSingleton
+{
+	protected:
+		TSingleton() { }
+
+		virtual ~TSingleton() { }
+
+	public:
+		void stop()
+		{
+			if(mInst)
+			{
+				delete mInst;
+				mInst=NULL;
+			}
+		}
+
+		T* instance()
+		{
+			T* Ret = mInst;
+			if(!Ret)
+				Ret = mInst = new T;
+			return Ret;
+		}
+
+	private:
+		static T*  mInst;
+};
+
+template
+T* TSingleton::mInst = 0;
+
+class CClasse : public TSingleton
+{
+    	friend class TSingleton;
+};
+
+int main()
+{
+	CClasse T;
+	CClasse U;
+	for(int i=0; i&lt;3; ++i)
+	{
+		std::cout &lt;&lt; T.instance() &lt;&lt; std::endl;
+		std::cout &lt;&lt; U.instance() &lt;&lt; std::endl;
+	}
+	U.stop();
+	return EXITSUCCESS;
+}</pre>
+<p>Une seconde méthode consiste à retourner une référence sur un objet statique :</p>
+<pre class="brush:cpp">#include 
+
+template
+class TSingleton
+{
+  protected:
+    TSingleton()
+    {
+    }
+
+    virtual ~TSingleton()
+    {
+    }
+
+  public:
+    T&amp; instance()
+    {
+      static T Ret;
+      return Ret;
+    }
+};
+
+class CClasse : public TSingleton
+{
+  friend class TSingleton;
+};
+
+int main()
+{
+  CClasse T;
+  CClasse U;
+  for(int i=0; i&lt;3; ++i)
+  {
+    std::cout &lt;&lt; &amp;(T.instance()) &lt;&lt; std::endl;
+    std::cout &lt;&lt; &amp;(U.instance()) &lt;&lt; std::endl;
+  }
+  return EXIT_SUCCESS;
+}</pre>
+<h2>Surcharge operator*</h2>
+<h3>Surcharge operator&lt;&lt;</h3>
+<p>Pour pouvoir utiliser l'opérateur de sortie, directement avec sa classe, il faut déclarer la méthode, à surcharger, comme friend de notre classe.<br />
+Ainsi dans le fichier en-tête :</p>
+<pre class="brush:cpp">#include
+#include
+
+class CString : protected std::string
+{
+friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; _os, const CString&amp; _string);
+}</pre>
+<p>Et sa définition sera mise dans le fichier corps de la classe :</p>
+<pre class="brush:cpp">std::ostream&amp; operator&lt;&lt;(std::ostream&amp; _os,const CString&amp; _string)
+{
+const std::string* l_tmp;
+l_tmp = &amp;_string;
+_os &lt;&lt; (*l_tmp);
+return _os;
+}</pre>
+<h3>Surcharge operator+</h3>
+<p>Pour effectuer la surcharge de l'operator+, la même méthode que pour l'operator&lt;&lt; peut être utilisée mais une autre méthode est plus commode.</p>
+<p>Elle consiste à intégrée la méthode à surchargée comme une méthode classique de votre classe.</p>
+<p>Ainsi on aura la déclaration suivante :</p>
+<pre class="brush:cpp">#ifndef _CLASSE_H_
+#define _CLASSE_H_
+
+#include
+#include
+
+class CClasse
+{
+public:
+CClasse();
+~CClasse();
+
+const CClasse operator+(const char* _string);
+const CClasse operator+(const CClasse&amp; _classe);
+}
+
+#endif //_CLASSE_H_</pre>
+<p>On note, au passage, que rien ne nous empêche de surcharger operator+ avec différent type de paramètres.</p>
+<p>La définition, quant à elle, est la suivante :</p>
+<pre class="brush:cpp">const CClasse CClasse::operator+(const char* _string)
+{
+CClasse l_ret;
+//Traitement sur l_ret
+return l_ret;
+}</pre>
+<h2>Caractères échappés</h2>
+<p>\a : Alerte (buzzer).<br />
+\b : Backspace.<br />
+\f : Saute une page.<br />
+\n : Saute une ligne.<br />
+\r : Retour chariot.<br />
+\t : Tabulation horizontale.<br />
+\v : Tabulation verticale.<br />
+\\ : Antislash.<br />
+\' : Apostrophe.<br />
+\" : Guillemets.<br />
+\? : Point interrogation.</p>

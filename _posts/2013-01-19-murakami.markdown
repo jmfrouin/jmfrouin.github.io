@@ -1,0 +1,36 @@
+---
+layout: post
+status: publish
+published: false
+title: Murakami
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-19 10:35:02 +0100'
+date_gmt: '2013-01-19 09:35:02 +0100'
+categories:
+- livres
+tags: []
+comments: []
+---
+<p>[one_half last="no"]Il y a quelques temps j'ai lu un livre qui m'a beaucoup plu : <em>Kafka sur le Rivage</em>. Depuis j'alterne un livre de Haruki Murakami, et un livre d'un autre genre pour ne pas en faire une overdose. Je vais essayer de recenser ici les différents livres. Ce livre, reste, pour le moment, mon préféré.[/one_half]</p>
+<!--more-->
+<p>[one_half last="yes"]<a href="http://www.amazon.fr/Kafka-sur-rivage-Haruki-Murakami/dp/2264056169/"><img alt="" src="http://ecx.images-amazon.com/images/I/41lzuEDbgTL._AA160_.jpg" /></a>[/one_half]<br />
+En voici la description de l'éditeur :</p>
+<blockquote><p>Un adolescent, Kafka Tamura, quitte la maison familiale de Tokyo pour échapper à une malédiction oedipienne proférée par son père. De l'autre côté de l'archipel, Nakata, un vieil homme amnésique, décide lui aussi de prendre la route. Leurs deux destinées s'entremêlent pour devenir le miroir l'une de l'autre, tandis que, sur leur chemin, la réalité bruisse d'un murmure envoûtant.</p></blockquote>
+<p>&nbsp;</p>
+<p>[one_half last="no"]<a href="http://www.amazon.fr/Au-sud-fronti%C3%A8re-louest-soleil/dp/2714437486/"><img alt="" src="http://ecx.images-amazon.com/images/I/518N8FKY9YL._AA160_.jpg" /></a>[/one_half]<br />
+[one_half last="yes"]<em>Au sud de la frontière, à l'ouest du soleil</em>, plus intimiste, moins fantastique et tourne autour d'une histoire d'amour. [/one_half]</p>
+<p>En voici la description de l'éditeur :</p>
+<blockquote><p>Hajime a connu pour la première fois l'amour en compagnie de la douce Shimamoto-San. Séparés par la vie, il n'a pourtant jamais oublié. Aujourd'hui, à l'aube de la quarantaine, Hajime est devenu un homme ordinaire et s'est construit une vie agréable entre sa famille et un métier qui lui plaît. Ce fragile équilibre résistera-t-il à ses retrouvailles avec Shimamoto-San ?</p></blockquote>
+<p>&nbsp;</p>
+<p>[one_half last="no"]Enfin ma lecture actuelle : <em>1Q84</em>. Je n'en suis pour le moment qu'au tome 2 mais cette trilogie pourrait surpasser Kafka. Je viendrai éditer cet article à la fin du troisième tome.[/one_half]</p>
+<p>[one_half last="yes"]<a href="http://www.amazon.fr/1Q84-Livre-Avril-Juin-Haruki-Murakami/dp/2264057882/ref=sr_1_1?ie=UTF8&amp;qid=1358227868&amp;sr=8-1"><img alt="" src="http://ecx.images-amazon.com/images/I/41nd4nuNr5L._AA160_.jpg" /></a><img alt="" src="http://ecx.images-amazon.com/images/I/414F1sPSDcL._AA160_.jpg" /></a>[/one_half]</p>
+<blockquote><p>Au Japon, en 1984.<br />
+C'est l'histoire de deux mondes, celui réel de 1984 et un monde parallèle tout aussi vivant, celui de 1Q84. Deux mondes imbriqués dans lesquels évoluent, en alternance, Aomamé et Tengo, 29 ans tous deux, qui ont fréquenté la même école lorsqu'ils avaient dix ans. A l'époque, les autres enfants se moquaient d'Aomamé à cause de son prénom, « Haricot de soja », et de l'appartenance de ses parents à la nouvelle religion des Témoins. Un jour, Tengo l'a défendue et Aomamé lui a serré la main. Un pacte secret conclu entre deux enfants, le signe d'un amour pur dont ils auront toujours la nostalgie.<br />
+En 1984, chacun mène sa vie, ses amours, ses activités.<br />
+Tueuse professionnelle, Aomamé se croit investie d'une mission : exécuter les hommes qui ont fait violence aux femmes. Aomamé a aussi une particularité : la faculté innée de retenir quantité de faits, d'événements, de dates en rapport avec l'Histoire.<br />
+Tengo est un génie des maths, apprenti-écrivain et nègre pour un éditeur qui lui demande de réécrire l'autobiographie d'une jeune fille échappé ç la secte des Précurseurs. Il est aussi régulièrement pris de malaises lors desquels il revoit une scène dont il a été témoin à l'âge d'un an et demi.<br />
+Les deux jeunes gens sont destinés à se retrouver mais où ? Quand ? En 1984 ? Dans 1Q84 ? Dans cette vie ? Dans la mort ?</p></blockquote>
+<p>En tout cas, Murakami devient, pour moi, une valeur sure, jamais déçu par ses livres, bien qu'ayant un style bien à lui, le genre reste toujours un peu le même. Mais chacun de ses livres est rafraichissant et une fois commencer, difficile d’arrêter. </p>

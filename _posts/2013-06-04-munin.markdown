@@ -1,0 +1,55 @@
+---
+layout: post
+status: publish
+published: true
+title: Monitorer plusieurs serveurs (2 ici) avec munin
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-06-04 19:34:11 +0200'
+date_gmt: '2013-06-04 18:34:11 +0200'
+categories:
+- monitoring
+tags: []
+comments:
+- id: 361
+  author: RoaxDunk
+  author_email: zakaria.naoura@gmail.com
+  author_url: ''
+  date: '2013-11-26 16:10:19 +0100'
+  date_gmt: '2013-11-26 15:10:19 +0100'
+  content: Zabbix, Centreon, Nagios, Cacti ou Munin ?
+- id: 363
+  author: Jean-Michel Frouin
+  author_email: jm@frouin.me
+  author_url: http://frouin.me
+  date: '2013-11-26 16:13:22 +0100'
+  date_gmt: '2013-11-26 15:13:22 +0100'
+  content: "J'avais oublié de préciser que mon choix s'est porté sur Munin pour la
+    légèreté de l'outil (en terme de ressources) :) \nJe combine avec monit, m/monit
+    et deux trois cron qui envoient des mails."
+---
+<p>Installer munin sur le serveur principal (Sous Debian Etch)</p>
+<pre class="brush:shell">apt-get install munin munin-node</pre>
+<p>Une fois installé, il faut le configurer :</p>
+<pre class="brush:shell">vi /etc/munin/munin.conf</pre>
+<p>Voici le contenu :</p>
+<pre class="brush:plain">dbdir   /var/lib/munin
+htmldir /var/www/mmunin
+logdir  /var/log/munin
+rundir  /var/run/munin
+
+tmpldir /etc/munin/templates
+
+[srv-1.frouin.me]
+    address 127.0.0.1
+    use_node_name yes
+</pre>
+<p>Je ne détaillerai pas ici, comment exposer /var/www/munin via nginx par exemple.</p>
+<p>Ensuite on donne les droits à munin</p>
+<p>chown munin:munin /var/www/monit/</p>
+<p>Et on relance le noeud de munin :</p>
+<p>service munin-node restart</p>
+<p>Et voila :)<br />
+On peut déjà consulter les stats du serveur via l'url de votre choix.</p>

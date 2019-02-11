@@ -1,0 +1,114 @@
+---
+layout: post
+status: publish
+published: true
+permalink: cmake
+title: cmake
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-02-01 21:20:42 +0100'
+date_gmt: '2013-02-01 20:20:42 +0100'
+categories:
+- bash
+- home
+tags: []
+comments: []
+---
+<h2>Introduction</h2>
+<p>cmake, développé par <a href="http://www.cmake.org" target="_blank">Kitware</a> est un outil d'aide à la génération de Makefile (cmake sait aussi générer des projets Microsoft Visual Studio, Borland ...). Il permet de gérer pour nous beaucoup de problèmes, liés à la cross-compilation, compilation multi-plateforme.</p>
+<p>Il remplace avantageusement les autotools (Set de 3 outils : libtool, automake et autoconf), qui ont de gros avantages mais aussi de gros inconvénients. En effet, ils automatisent beaucoup de choses comme cmake, mais à chaque évolution d'un des outils, il n'est pas étonnant d'avoir à modifier les fichiers de configuration dont la syntaxe à changée. De plus l'apprentissage de plusieurs langages de description (un pour automake, un pour autoconf, m4 ...) est aussi un frein à leur utilisation.</p>
+<!--more-->
+<p>cmake utilise un fichier CMakeLists.txt pour décrire la compilation d'un projet.</p>
+<p>Sa syntaxe :</p>
+<h3>Nom du projet</h3>
+<p>Pour définir un projet on utilise la commande PROJECT :</p>
+<pre class="brush:shell">PROJECT (nom_du_projet CXX) (Pour du C++)
+PROJECT (nom_du_projet Language) (Générique)
+PROJECT (nom_du_projet)</pre>
+<h3>Inclusion</h3>
+<p>Il est possible d'inclure un fichier cmake dans un CMakeLists.txt en utilisant la commande INCLUDE.</p>
+<pre class="brush:shell">INPUT(plugins.cmake)</pre>
+<h3>Répertoires</h3>
+<p>On include des sous répertoires avec ADD_SUBDIRECTORY :
+<pre class="brush:shell">
+INCLUDE_DIRECTORIES(AFTER SYSTEM . ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR} ) #/usr/include/gtk-2.0 /usr/lib/gtk-2.0/include /usr/include/atk-1.0 /usr/include/cairo /usr/include/pango-1.0 /usr/include/glib-2.0 /usr/lib/glib-2.0/include /usr/include/freetype2 /usr/include/libpng12 /usr/include/pixman-1 /usr/include/glib-2.0 /usr/lib/glib-2.0/include)
+</pre>
+<h3>Les cibles</h3>
+<p>Trois types de commandes, permettent de définir des cibles :</p>
+<h4>ADD_EXECUTABLE</h4>
+<p>Le premier argument est le nom de binaire à construire. Le reste sont des fichiers sources nécessaires à la compilation du binaire.</p>
+<p>Exemple:</p>
+<pre class="brush:shell">ADD_EXECUTABLE(gbemu ${gbemu_src})</pre>
+<h4>ADD_CUSTOM_TARGET</h4>
+<p>Exemple :</p>
+<pre class="brush:shell">ADD_CUSTOM_TARGET(cscope COMMAND find ${CMAKE_SOURCE_DIR} -name "*.h" -o -name "*.cpp" &gt; ${CMAKE_SOURCE_DIR}/cscope.files &amp;&amp; cscope -b -q -f${CMAKE_SOURCE_DIR}/cscope.out)</pre>
+<p>et </p>
+<pre class="brush:shell">ADD_LIBRARY</pre>
+<p>Il est possible de positionner ou récupérer leurs propriétés en utilisant les commandes :</p>
+<pre class="brush:shell">SET_TARGET_PROPERTIERS
+GET_TARGET_PROPERTIERS</pre>
+<h3>Librairies</h3>
+<p>Si rien n'est spécifié, cmake utilisera la valeur de la variable <strong>BUILD_SHARED_LIBS</strong> (Si BUILD_SHARED_LIBS n'est pas renseignée, cmake compilera en statique.) pour construire les librairies. Il suffit d'ajouter <em>#cmakedefine BUILD_SHARED_LIBS</em> dans le fichier config.h.cmake pour l'activer.</p>
+<p>Librairie statique :</p>
+<pre class="brush:shell">ADD_LIBRARY(nom STATIC file1.cpp file2.cpp)</pre>
+<p>Librairie dynamique :</p>
+<pre class="brush:shell">ADD_LIBRARY(nom SHARED file1.cpp file2.cpp)</pre>
+<p>Il est possible d'utiliser la commande FIND_LIBRARY pour rechercher des librairies sur le système :</p>
+<pre class="brush:shell">FIND_LIBRARY(LIBC_LIBRARY NAMES libc libc5 libc6 PATHS /usr/lib /usr/local/lib)</pre>
+<h3>Les fichiers sources</h3>
+<p>Il est possible de spécifié les propriétés des fichiers sources gràce à :</p>
+<pre class="brush:shell">SET_SOURCE_FILE_PROPERTIES
+GET_SOURCE_FILE_PROPERTIES</pre>
+<h3>Propriétés</h3>
+<pre class="brush:shell">LINK_FLAGS : Options de link des librairies.
+COMPILE_FLAGS : Flags des fichiers source (notamment -D, -I ...).
+GENERATED : Le fichier à été généré ?
+OBJECT_DEPENDS : Ajouter des fichiers dont dépend le fichier source.</pre>
+<p>Il est possible de spécifié avec quelle(s) librairie(s) compilera une cible gràce à : <strong>LINK_LIBRARIES</strong> ou <strong>TARGET_LINK_LIBRARIES</strong>.</p>
+<h3>Les listes</h3>
+<p>Il est possible de définir des listes, de fichiers sources par exemple :</p>
+<pre class="brush:shell">SET(SCLEANER_SRC scleaner_wx.cpp engine.cpp)</pre>
+<p>On utilisera ${SCLEANER_SRC} par la suite.</p>
+<h3>Les variables</h3>
+<p>Les variables peuvent être définies n'importe où dans le fichier cmakeList.txt.</p>
+<p>Définir la variable VAR et lui affecter la valeur 10 : SET (VAR 10).</p>
+<h3>IF</h3>
+<p>La commande IF s'utilise ainsi :</p>
+<pre class="brush:shell">IF (${VAR} LESS 3)
+SET (VAR 3)
+ELSE (${VAR} LESS 3}
+SET (VAR 4)
+ENDIF (${VAR} LESS 3}</pre>
+<p>PLusieurs commandes sont définies permettant de faire différents tests :</p>
+<blockquote><p>NOT var : Non binaire.<br />
+var1 AND var2 : Et binaire.<br />
+var1 OR var2 : Ou binaire.<br />
+COMMAND nom : Vérifie que la commande est bien définie.<br />
+DEFINED var : Vérifie que la variable est bien définie.<br />
+EXISTS nom_fichier : Vérifie sur le fichier existe.<br />
+EXISTS nom_répertoire : Vérifie que le répertoire existe.<br />
+var MATCHES exp_reg : Correspond à une expression régulière.<br />
+chaine MATCHES exp_reg : Correspond à une expression régulière.<br />
+var [STR]EQUAL nombre<br />
+chaine [STR]EQUAL nombre<br />
+var [STR]LESS nombre<br />
+chaine [STR]LESS nombre<br />
+var [STR]GREATER nombre<br />
+chaine [STR]GREATER nombre</p></blockquote>
+<h3>FOREACH</h3>
+<pre class="brush:shell">SET(VAR 1 2 3}
+
+FOREACH(I ${VAR})
+MESSAGE("Ca y est je compte sur mes doigts ${I}")
+ENDFOREACH(I ${VAR})</pre>
+<h3>WHILE</h3>
+<pre class="brush:shell">WHILE(var LESS 3600)
+MESSAGE("Ca y est je compte sur mes doigts ${I}")
+ENDWHILE(var LESS 3600)</pre>
+<h2>Crosscompilation avec cmake</h2>
+<p>Avant de commencer on est obligé de définir quelques variables d'environnement que cmake n'est pas encore capable de deviner tout seul (A partir de la version 2.6.0 semble t'il) :</p>
+<pre class="brush:shell">CMAKE_SYSTEM_NAME : Le nom du système donc Linux, Windows ou Generic. Une fois cette variable positionée, cmake positionne CMAKE_CROSSCOMPILING à vrai, ce qui permet de savoir que l'on souhaite crosscompiler l'application. (Après test cela ne fonctionne pas dans la 2.4, CMAKE_CROSSCOMPILING reste indéfini)
+CMAKE_C_COMPILER : Localisation du compilateur C.
+CMAKE_CXX_COMPILER : Localisation du compilateur CXX.</pre>

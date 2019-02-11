@@ -1,0 +1,155 @@
+---
+layout: post
+status: publish
+permalink: gcc
+published: true
+title: GNU Cross Compiler
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-02-20 19:22:49 +0100'
+date_gmt: '2013-02-20 18:22:49 +0100'
+categories:
+- gcc
+- cpp
+tags: []
+comments: []
+---
+<h2>Options</h2>
+<p>-IRépertoire : Ajoute un répertoire à la liste des répertoires connus par le compilateur et dans lesquels, il va rechercher les fichiers inclus avec la directive <em>#include</em>.<br />
+-g : Inclus les symboles de debug, sans cela pas moyen d'utiliser gdb.<br />
+-Wall : Active tous les warnings lors de la compilation.<br />
+-MD : Générer automatiquement les dépendances (fichier *.d).<br />
+-pg -fprofile-arcs -ftest-coverage : Active l'analyse de coverage. Puis lancer gcov source.cpp.<br />
+-S : Produit le fichier assembleur.<br />
+-E : Produit le fichier précompilé.</p>
+<h2>Macros du préprocesseur</h2>
+<p>Un <a href="http://sourceforge.net/p/predef/wiki/Home/" target="_blank">site regroupe l'intégralité des macros C/C++</a> les plus communes, organisées par plateforme et compilateur.</p>
+<p>__STDC__ : Définie si le compilateur est conforme à la norme AINSI C. Désactivé si l'option \textit{-traditional-cpp} est activée.<br />
+__STDC_VERSION__ : Version de la norme AINSI au format AAAAMML. Désactive si l'option \textit{-traditional-cpp} est activée.<br />
+__GNUC__ : Numéro de version majeure.<br />
+__GNUC_MINOR__ : Numéro de version mineure.<br />
+__GNUC_PATCHLEVEL__ : Numéro de patch.<br />
+__FILE__ : Nom du fichier compilé.<br />
+__BASE_FILE__ : Nom du fichier contenant le point d'entrée du programme.<br />
+__LINE__ : Ligne de compilation. Il est possible de la redéfinir avec \textit{\#line}\index{\#line}<br />
+__DATE__ : Date de compilation au format : Mai 17 2007.<br />
+__TIME__ : Heure de compilation au format : 19:26:01.<br />
+__TIMESTAMP__ : Date et heure de compilation.<br />
+__STDC_HOSTED__ : Définition ?<br />
+__cplusplus : Numéro de version du compilateur C++. Quand le compilateur est conforme  la norme cette macro vaut 199711L.<br />
+__ASSEMBLER__ : Défini quand le compilateur compile l'assembleur en binaire.<br />
+__GNUG__ <=> __GNUC__ <=> __cplusplus<br />
+__INCLUDE_LEVEL__ : Niveau d'inclusion du fichier compilé.<br />
+__ELF__ : Définie si la cible utilise le format ELF.<br />
+__VERSION__ : Version du compilateur.<br />
+__OPTIMIZE__ : Définie durant une compilation optimisée.<br />
+__OPTIMIZE_SIZE__ : Définie durant une compilation optimisée en taille non en vitesse.<br />
+__NO_INLINE__ : Définie si les fonctions inline, ne le sonts plus. Soit parce que le compilateur n'optimise pas, soit car l'option \textit{-fno-inline} est active.<br />
+__GNUC_GNU_INLINE__ : Définie quand les fonctions inline sont gérées par le mode gnu89.<br />
+__GNUC_STDC_INLINE__ : Définie quand les fonctions inline sont gérées par le mode ISO C99.<br />
+__CHAR_UNSIGNED__ : Utilisé par limits.h.<br />
+__WCHAR_UNSIGNED__ : Définie quand le type wchar_t non signé.<br />
+__REGISTER_PREFIX__ : Préfixe des registres dans l'assembleur de la machine.<br />
+__USER_LABEL_PREFIX__ : Préfixe des labels dans l'assembleur de la machine. Fonctionne même si \textit{-f(no-)underscores} est défini.<br />
+__SIZE_TYPE__ :<br />
+__PTRDIFF_TYPE__ :<br />
+__WCHAR_TYPE__ :<br />
+__WINT_TYPE__ :<br />
+__INTMAX_TYPE__ :<br />
+__UINTMAX_TYPE__ : \multirow{-5}{8cm}{Utilisées par stddef.h et wchar.h.}</p>
+<p>__CHAR_BIT__ : Nombre de bits d'un char.<br />
+__SCHAR_MAX__ :<br />
+__WCHAR_MAX__ :<br />
+__SHRT_MAX__ :<br />
+__INT_MAX__ :<br />
+__LONG_MAX__ :<br />
+__LONG_LONG_MAX__ :<br />
+__INTMAX_MAX__  : \multirow{-6}{8cm}{Utilisées par les limites numériques uniquement.}<br />
+__SIZEOF_INT__ :<br />
+__SIZEOF_LONG__ :<br />
+__SIZEOF_LONG_LONG__ :<br />
+__SIZEOF_SHORT__ :<br />
+__SIZEOF_POINTER__ :<br />
+__SIZEOF_FLOAT__ :<br />
+__SIZEOF_DOUBLE__ :<br />
+__SIZEOF_LONG_DOUBLE__ :<br />
+__SIZEOF_SIZE_T__ :<br />
+__SIZEOF_WCHAR_T__ :<br />
+__SIZEOF_WINT_T__ :<br />
+__SIZEOF_PTRDIFF_T__ : \multirow{-11}{8cm}{Taille des types.}<br />
+__DEPRECATED : Définie si les messages d'avertissements de préemption sont activés. Ils peuvent être désactivés par l'option \textit{-Wno-deprecated}.<br />
+__EXCEPTIONS : Définie quand le compilateur compile un code source C++ avec les exceptions activées. On peut les désactiver en utilisant l'option \textit{-fno-exceptions}.<br />
+__USING_SJLJ_EXCEPTIONS__ : Utilise l'ancien système de gestion d'exceptions ( base de setjmp et de longmp).<br />
+__GXX_EXPERIMENTAL_CXX0X__ : \textbf{Exprimental}. Définie si les options \textit{-std=c++0x} ou \textit{-std=gnu++0x}.<br />
+__GXX_WEAK__ : Utilisée pour faciliter l'implémentation du runtime C++.<br />
+__LP64__ ou _LP64 : Définie si le compilateur gre les entiers longs et les pointeurs 64 bits, ainsi que les entiers sur 32 bits.<br />
+__SSP__ : Définie si l'option \textit{-fstack-protector} est utilisée.<br />
+__SSP_ALL__ : Définie si l'option \textit{-fstack-protector-all} est utilisée.</p>
+<h2>Précompilation</h2>
+<h3>Conditions</h3>
+<p>Il est possible d'inclure différentes parties de code en utilisant des blocs conditionnels de précompilation.</p>
+<p>Deux types de blocs existent, le premier basé sur <em>#ifdef</em>, le second sur <em>#if</em>.</p>
+<p>Les voici : </p>
+<pre class="brush:cpp">
+#ifdef LONGUEUR //ou #if defined ...
+    ...
+#else
+    ...
+#endif
+</pre>
+<p>ou sa contraposée :</p>
+<pre class="brush:cpp">
+#ifndef LONGUEUR // ou #if not defined ...
+    ...
+#else
+    ...
+#endif
+</pre>
+<pre class="brush:cpp">
+#if (LONGUEUR :: LARGEUR)
+    ...
+#elif (VOLUME)
+    ...
+#else
+    ...
+#endif
+</pre>
+<h3>Erreurs et warnings</h3>
+<p>Le compilateur GNU ajoute deux directives, permettant de générer des erreurs et des warnings.</p>
+<p>Ainsi pour générer une erreur lors de la compilation, on utilise la directive <em>#error</em> : </p>
+<pre class="brush:cpp">
+#ifndef LEAKS
+    #error "Detection de fuites memoire desactivee"
+#endif
+</pre>
+<p>Ou alors pour ne générer qu'un warning : <em>\#warning</em></p>
+<pre class="brush:cpp">
+#ifndef LEAKS
+    #warning "Detection de fuites memoire desactivee"
+#endif
+</pre>
+<h3>Inclusion</h3>
+<p>Il est possible d'inclure un autre fichier, en utilisant la directive très connue, et utilisée : </p>
+<p><em>#include <fichier></em>, si il s'agit d'un fichier se trouvant dans un des répertoires dans lesquels le compilateur va chercher les fichiers sources.</p>
+<p><em>#include "fichier"</em>, si il s'agit d'un fichier se trouvant dans le répertoire de compilation.</p>
+<h3>Observer la précompilation</h3>
+<pre class="brush:bash">
+gcc -E file.cpp > file_precomp.cpp
+</pre>
+<pre>Macro</pre>
+<p>Il est possible d'utiliser la directive <em>#define</em> pour remplacer un identifiant par le texte correspondant. Ainsi, en définissant <em>#define LONGUEUR 100</em> le compilateur remplacera toutes les occurences de LONGUEUR par 100 dans le code source lors de la précompilation.</p>
+<p>Il est possible d'annuler un <em>#define</em> en utilisant la directive <em>#undef</em>. Ainsi pour annuler, on utilise <em>#undef LONGUEUR</em> par exemple.</p>
+<h3>Pragma</h3>
+<p>La directive <em>#pragma</em> sert à utiliser des commandes de précompilations définies par le compilateur.</p>
+<h2>Désactiver un warning GCC depuis les sources.</h2>
+<pre class="brush:cpp">
+// disable for this header only
+#pragma warning(push)
+#pragma warning(disable:4512)
+#pragma warning(disable:4180)
+#include <boost/lambda/lambda.hpp>
+// restore original warning level
+#pragma warning(pop)
+</pre>

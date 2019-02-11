@@ -1,0 +1,100 @@
+---
+layout: post
+status: publish
+published: true
+permalink: doxygen
+title: doxygen
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-26 06:14:58 +0100'
+date_gmt: '2013-01-26 05:14:58 +0100'
+categories:
+- home
+- bash
+tags: []
+comments: []
+---
+<h2>Présentation</h2>
+<p>La documentation doxygen est générée à partir d'un fichier de configuration.<br />
+Ce fichier est un fichier texte avec extension dox.<br />
+Couplé à l'utilitaire dot il permet de générer les graphes de dépendances des classes.<br />
+Doxygen est capable de produire de l'html, du LaTeX ou des fichiers man.</p>
+<!--more-->
+<h2>Exemple sur un prototype</h2>
+<pre class="brush:cpp">/*!
+* @brief 2nd constructor.
+* @note Never called by user.
+* @param parent A pointer on parent wxWindow.
+* @param id ID of this UI.
+* @param caption Caption of sdatabase set by default on APP_NAME
+* @param pos Position of sdatabase.
+* @param size Size of sdatabase.
+* @param style Style of sdatabase by default set to wxDEFAULT_FRAME_STYLE.
+* @return True if everything is OK, false on KO.
+*/
+bool Create (wxWindow* parent, wxWindowID id = -1,const wxString& caption = APP_NAME,const wxPoint& pos = wxDefaultPosition,const wxSize& size = wxDefaultSize,long style = wxDEFAULT_FRAME_STYLE);
+</pre>
+<h2>Tags</h2>
+<p>@brief : description brève de la méthode (C++) ou de la fonction (C) .<br />
+@note : utile pour signaler quelque chose (doxygen utilisera une fonte particulière pour les notes, ce qui est assez pratique).<br />
+@param : permet de décrire un paramètre.<br />
+@return : idem que param pour les valeurs de retour.</p>
+<h2>Page d'accueil</h2>
+<p>La page d'accueil de la documentation générée, peut être complétée en utilisant le tag mainpage.</p>
+<p>Par exemple un fichier homepage.h placé dans le répertoire des sources (qui ne sera pas utilisé mais scanné par doxygen lors de la génération de la doc) et contenant :</p>
+<pre class="brush:cpp">
+/*! @mainpage Page d'accueil de Projet
+*
+* @section intro Introduction
+*
+* Projet est utile et sert beaucoup.
+*
+* @section install Installation
+*
+* Un make install merci d'installer simplement Projet.
+*
+* @section capture Captures d'ecran
+*
+* Capture d'écran de Projet sous GNU-Linux Ubuntu 7.04 :
+* @image html projet Projet.png
+*/
+</pre>
+<p>Générera la page d'accueil.</p>
+<h2>Pages associées</h2>
+<h3>Ajouter une nouvelle page</h3>
+<p>Il est possible d'insérer des pages dans l'onglet "Pages associées" en insérant n'importe où dans le code :</p>
+<pre class="brush:cpp">
+/*! @page page7 Descendances
+*
+* Pour pouvoir compiler correctement, vous aurez besoin d'installer les librairies suivantes :
+*
+* wxWidgets >= 2.6
+*/
+</pre>
+<p>Ajoutera un nouveau lien vers une page "Dépendances" dans l'index des pages associées.</p>
+<h3>Sous page</h3>
+<p>Il est possible de regrouper plusieurs page de documentations dans une seule page de l'onglet "Pages associées".</p>
+<p>Imaginons que notre application utilise des greffons. Chaque développeur de greffon peut avoir des remarques à faire sur le greffon qu'il maintient. Pour simplifier l'organisation de la documentation, on regroupe la documentation de tous les greffons dans une page "Documentations des greffons" dans l'onglet "Pages associées".</p>
+<p>Ainsi le développeur d'un greffon insérera dans son greffon le code suivant : </p>
+<pre class="brush:cpp">
+/*! @page page6 Documentations des greffons.
+* - @subpage greffon1
+*/
+
+/*! @page greffon1 Nom du greffon
+* @section desc Description
+* Description du greffon.
+*
+* @section param Paramètres
+* Description des paramètres spécifiques au greffon.
+
+* @section pb Problèmes connus
+* Description des problèmes connus.
+*
+* @section afaire A faire
+* Description des choses qu'il reste a faire.
+*/
+</pre>
+<p>Une fois la documentation doxygen générée, une nouvelle page nommée "Documentations des greffons" fera son apparition dans l'onglet "Pages associées". En cliquant dessus, un index de tous les greffons correctement documentés sera disponible.</p>

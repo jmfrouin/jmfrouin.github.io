@@ -1,0 +1,29 @@
+---
+layout: post
+status: publish
+published: true
+title: Surveillance automatisée des logs d'un serveur avec logwatch
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-11-28 10:30:02 +0100'
+date_gmt: '2013-11-28 09:30:02 +0100'
+categories:
+- monitoring
+- securite
+tags: []
+comments: []
+---
+<p><strong>logwatch</strong> est un petit outil fort sympathique, qui permet de vous envoyant un mail résumant les évolutions dans les principaux logs de votre serveur.<br />
+Avant toute chose il faut l’installer :</p>
+<pre class="brush:shell">sudo aptitude install logwatch</pre>
+<p>Une fois installé, il faut modifier sa configuration, on va donc dans <em>/etc/logwatch/</em>... ah non ... dans <strong>/usr/share/logwatch/default.conf/logwatch.conf</strong>, bon faut le savoir :/</p>
+<p>Là il faut changer deux trois choses : </p>
+<pre class="brush:shell">
+Output = mail
+MailTo = contact@domain.com
+Detail = Med
+</pre>
+<p>Et voila !<br />
+<a href="http://ubuntu-tutorials.com/2008/11/13/monitor-system-logs-with-logwatch/" target="_blank">Page originale</a></p>

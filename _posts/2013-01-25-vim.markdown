@@ -1,0 +1,142 @@
+---
+layout: post
+status: publish
+published: true
+permalink: vim
+title: vim
+author: Jean-Michel Frouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-25 18:20:48 +0100'
+date_gmt: '2013-01-25 17:20:48 +0100'
+categories:
+- vim
+- home
+tags: []
+comments: []
+---
+<p>vi(-improved) est un logiciel d'édition de texte.</p>
+<p>Lors d'un développement sous Linux, il est rarement utile d'avoir un traitement de texte (Bon sauf pour les rapports au chef), mais un éditeur de texte est indispensable.<br />
+Il ne faut pas confondre édition de texte et traitement de texte.</p>
+<p>Un traitement de texte (comme OpenOffice Word ou Word) est un logiciel qui facilite la mise en forme (voir l'édition) d'un document.<br /></p>
+<!--more-->
+<p>Il peut par exemple permettre de mettre un titre en gras ou bien d'augmenter ou de baisser la taille d'une ligne d'un document.</p>
+<p>L'éditeur de texte modifie juste des caractères dans un fichier.<br />
+Ainsi, donc, vi ne vous permettra pas de faire de traitement de texte, il faut le savoir.</p>
+<p>Par contre si il faut:<br />
+Modifier un mot ou en ensemble de mot, dans un ou plusieurs fichiers. (Modifier un seul mot dans 10 fichiers avec un traitement de texte devient vite laborieux.)<br />
+L'utilisation des expressions régulières permettant de faire des manipulations de texte complexe est encore une des fonctionnalités majeurs d'un éditeur de texte.</p>
+<p>Alors il existe deux grands logiciels d'édition de texte emacs et vi (rangés par ordre alphabétique), ne connaissant que vi, je ne donnerai mes impressions et expériences que sous vim (donc vi).<br />
+Alors pourquoi vi plutôt que emacs ? Parce-que j'ai appris avec lui :)</p>
+<p>Après c'est à vous de vous faire une opinion.<br /></p>
+<h2>Configuration : ~/.vimrc</h2>
+<p>Le fichier ~/.vimrc est le fichier de configuration de vim.</p>
+<p>Il est possible de mettre dedans certaines options pour ne pas avoir à les activer une par une à chaque lancement de vim. (ouf :D)</p>
+<h3>Les plus intéressantes</h3>
+set paste : Activer Copier/Coller.<br />
+set nu(mber) : Affiche le numéro de ligne dans la marge.<br />
+color enable : Active la coloration du texte.<br />
+set autoindent : Active l'indentation automatique.<br />
+set ruler : Active des informations intéressantes dans la barre du bas.<br />
+set sm : Affiche rapidement (par un mouvement du curseur) la parenthèse correspondante à celle que l'on tape.<br />
+set mouse=a : Active la souris (Utile avec la molette pour scroller).<br />
+set cursorline : Affiche la ligne courante.<br />
+set foldcolumn=2 : Active la colonne de fold de 2 caractères de large. (Ensuite utilisé les raccourcis de fold)<br />
+set ts=4 : Définir la tabulation valant 4 espaces.<br /> </p>
+<h2>Raccourcis</h2>
+<h3>Classiques</h3>
+<p>:w : Sauvegarder.<br />
+:wq : Sauvegarder et quitter<br />
+i : Ajouter du texte avant le curseur.<br />
+I : Ajouter du texte en début de ligne.<br />
+:w fichier & Sauvegarder le buffer en court dans fichier.<br />
+a : Ajouter du texte après le curseur.<br />
+A : Ajouter du texte en fin de ligne.<br />
+o : Ajouter du texte à la ligne suivante.<br />
+O : Ajouter du texte à la ligne précédente.<br />
+w : Avancer d’un mot.<br />
+b : Reculer d’un mot.</p>
+<h3>Héxadécimal</h3>
+<p>%!xxd : Passer en héxadécimal<br />
+%!xxd -r : Revenir à l'affichage normal</p>
+<h3>Shell</h3>
+<p>:!commande : Exécuter la commande.&<br />
+'' : Aller à la dernière position.<br />
+:!! : Exécuter la dernière commande shell.<br />
+' puis a-z : Atteindre le signet identifié par la lettre.<br />
+:r! commande : Insérer le résultat dans le buffer courant.<br />
+CTRL+N : Active l’auto-complétion.</p>
+<h3>Macros</h3>
+<p>:map l commande : Affecte la commande à la touche l (CTRL+V + Esc = Esc).<br />
+:unmap l : Déaffecte la touche l.<br />
+:map : Liste des touches mappées.</p>
+<h3>Sélection</h3>
+<p>SHIFT+V & Sélectionner une zone par ligne.<br />
+CTRL+V : Sélectionner une zone par colonne.<br />
+~ : Inverse la case du caractère.<br />
+u : Annuler la dernière opération.<br />
+CTRL+R : Restaurer la dernière opération.</p>
+<h3>Registres</h3>
+<p>"ay : Copie dans le registre a.<br />
+"ap : Colle le registre a.</p>
+<h3>Splits</h3>
+<p>:sp  fichier : Ouvre un split horizontal avec fichier.<br />
+:vs fichier : Ouvre un split horizontal avec fichier.<br />
+CTRL+W puis > : Augmente la taille du split.<br />
+CTRL+W puis < : Diminue la taille du split.<br />
+CTRL+W puis x : Inverse les splits.<br />
+</p>
+<h3>Avancés</h3>
+<p>:10,20w fichier : Sauvegarder de la ligne 10 à la ligne 20 du buffer en court dans fichier.<br />
+:10,20w>> fichier : Sauvegarder de la ligne 10 à la ligne 20 du buffer en court à la suite de fichier.</p>
+<p>:r fichier : Lit le fichier et l’insère après la ligne courante.<br />
+J : Joindre deux lignes.<br />
+:qa! & Quitte tous les buffers sans sauvegarder.<br />
+>> : Indenter une ligne.<br />
+<< : DéIndenter une ligne.<br />
+:ls : Lister les buffers ouverts.<br />
+Xy : Copier X lignes.<br />
+Xyw : Copier X mots.<br />
+:bX : Accéder au buffer X. (où X est le numéro retourné par :ls)<br />
+p : Coller après la ligne courante.<br />
+P : Coller après la ligne courante.<br />
+Xd : Effacer X lignes.<br />
+Xdw : Effacer X mots.<br />
+m puis a-z : Pose un signet identifié par la lettre.</p>
+<h3>Folds</h3>
+<p>zf : Créé un fold (et le ferme).<br />
+zo : Ouvre un fold.<br />
+zc : Ferme un fold.</p>
+<h3>Déplacements</h3>
+<p>:12 : Aller à la ligne 12.<br />
+12| : Aller à la colonne 12.<br />
+gg : Aller au début du fichier.<br />
+G : Aller à la fin du fichier.</p>
+<h3>Combos</h3>
+<p>xp : Inverse deux lettres.<br />
+ddp : Inverse deux lignes.</p>
+<h3>Macros</h3>
+<p>Ajouter du code devant plusieurs lignes : CTRL+V puis I puis le texte, et enfin ESC.<br />
+Ajouter du code derrière plusieurs lignes : CTRL+V puis A puis le texte, et enfin ESC.<br />
+. : Rejoue la dernière séquence effectuée.</p>
+<h2>Options ligne de commande</h2>
+<p>vi -o fichier1 fichier2 : Lance vim avec un split horizontal des deux fichiers.<br />
+vi -O fichier1 fichier2 : Lance vim avec un split vertical des deux fichiers.<br />
+vi -r fichier : Lancer vim et essaie de récupérer les données après un crash.<br />
+vi -R fichier : Lancer vim en mode lecture seule.<br />
+vi + fichier : Lancer vim à la dernière ligne de fichier.<br />
+vi +n fichier : Lancer vim à la ligne n de fichier.</p>
+<h2>Astuces</h2>
+<p>Définir la taille des tabulations dans un fichier<br />
+A la fin du fichier :<br />
+/* vi:set ts=4: */</p>
+<p>Basculer le type d'un fichier : dos, unix, mac<br />
+Pour ce faire on utilise :e ++ff= dos / unix / mac</p>
+<p>Supprimer les lignes vides:<br />
+:g/^$/d</p>
+<p>Case sensitive :<br />
+/recherche\C</p>
+<p>Case insensitive :<br />
+/recherche\c</p>
+<h2>Aller plus loin</h2>
+<p>A lire : <a href="http://www.pixelbeat.org/vim.tips.html" target="_blank">http://www.pixelbeat.org/vim.tips.html</a></p>

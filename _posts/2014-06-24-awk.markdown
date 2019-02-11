@@ -1,0 +1,106 @@
+---
+layout: post
+status: publish
+published: true
+permalink: awk
+title: awk
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2014-06-24 14:36:58 +0200'
+date_gmt: '2014-06-24 13:36:58 +0200'
+categories:
+- shell
+- bash
+- home
+- embarque
+tags: []
+comments: []
+---
+<h2>Définir les séparateurs</h2>
+<h3>Entrée : FS</h3>
+<p>Pour définir le séparateur d'entrée : FS</p>
+<pre class="brush:shell">BEGIN { 
+  FS=SUBSEP=" "
+}
+{
+  #Traitement
+}</pre>
+<!--more-->
+<h3>Sortie : OFS</h3>
+<p>Pour définir le séparateur de sortie : OFS</p>
+<pre class="brush:shell">BEGIN { 
+  OFS="\t"
+}
+{
+  #Traitement
+}</pre>
+<h2>Mise en forme</h2>
+<h3>Définir le format de sortie</h3>
+<p>Pour les nombres : </p>
+<pre class="brush:shell">BEGIN { 
+  OFMT = "%.0f"
+}
+{
+  #Traitement
+}</pre>
+<h3>Afficher des chaines</h3>
+<p>awk supporte la panoplie du printf : </p>
+<pre class="brush:shell">
+printf("%04d", value)
+</pre>
+<h2>Chaines de caractères</h2>
+<h3>Concaténation</h3>
+<p>La concaténation de chaines est très simple, et ne nécessite aucuns opérateurs : </p>
+<pre class="brush:shell">
+new_string = string" "string2 
+</pre>
+<h3>Longueur (strlen)</h3>
+<pre class="brush:shell">
+len = length(chaine)
+</pre>
+<h3>Rechercher (find)</h3>
+<pre class="brush:shell">
+idx=index(date,":")
+</pre>
+<h3>Remplacement (replace)</h3>
+<p>On peut remplacer un caractère par un autre dans une chaîne.</p>
+<pre class="brush:shell">
+gsub("/", "-", date)
+</pre>
+<h3>Split</h3>
+<p>awk permet d'exploser (explode en php) une chaîne de caractères.<br />
+Il stocke les morceaux dans un tableau, ici, nommé <em>array</em>.<br />
+La variable <em>len</em> contient le nombre d'éléments du tableau.<br />
+Enfin le caractère de séparation est le guillemet.</p>
+<pre class="brush:shell">
+len=split($0, array, "\"")
+</pre>
+<p>Ensuite on peut utiliser array[1] jusqu'à array[len]</p>
+<pre class="brush:shell">
+for(i=1;i<=len;i++){
+  print array[i]
+};
+</pre>
+<h3>Sous Chaîne (substr)</h3>
+<pre class="brush:shell">
+part1=substr(date,0,idx-1)
+</pre>
+<h2>Tests</h2>
+<h3>Si</h3>
+<pre class="brush:shell">
+if($STRING ~/PATTERN/ || ENTIER != 2 ) {
+}
+else
+{
+}
+</pre>
+<h2>Commande système</h2>
+<p>awk peut aussi, comme beaucoup d'autres langages de script,<br />
+appeler une commande système: </p>
+<pre class="brush:shell">
+cmd="date -u +\"%Y-%m-%d %H:%M:%S %z\" --date \""date"\""
+cmd|getline date; 
+close(cmd);
+</pre>

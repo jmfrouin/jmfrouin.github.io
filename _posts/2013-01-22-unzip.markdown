@@ -1,0 +1,26 @@
+---
+layout: post
+status: publish
+published: true
+title: unzip *
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-01-22 07:47:47 +0100'
+date_gmt: '2013-01-22 06:47:47 +0100'
+categories:
+- bash
+tags: []
+comments: []
+---
+<p>zip ne supporte pas le wildcard pour décompresser plusieurs fichiers zip d'un coup.</p>
+<p>Du coup un petit script est nécessaire pour dézipper tous les fichier ZIP d'un répertoire.</p>
+<!--more-->
+<pre class="brush:as3">#!/bin/sh
+for zip in *.zip
+do
+unzip $zip
+#echo "$zip"
+done
+exit</pre>

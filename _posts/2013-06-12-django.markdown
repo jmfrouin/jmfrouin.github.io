@@ -1,0 +1,88 @@
+---
+layout: post
+status: publish
+published: true
+title: Django 1.6.5 sur Ubuntu
+author: Jean-Michel Frouin
+author_login: jmfrouin
+author_email: jm@frouin.me
+author_url: http://frouin.me
+date: '2013-06-12 15:50:24 +0200'
+date_gmt: '2013-06-12 14:50:24 +0200'
+categories:
+- python
+- django
+tags: []
+comments: []
+---
+<p>Ce mémo vise à détailler l'installation de Django 1.6.5 sur Ubuntu au lieu de la version qui est dans les dépôts.<br />
+<!--more-->
+Et à centraliser les informations importante sur Django.</p>
+<h2>Prérequis</h2>
+<p>Par défaut il vous faut python, installé par défaut sur ubuntu, sinon : </p>
+<pre class="brush:shell">sudo apt-get install python</pre>
+<p>Vérification de la version de python : </p>
+<pre class="brush:shell">python
+Python 2.7.4 (default, Apr 19 2013, 18:28:01)</pre>
+<p>On récupère PIP : </p>
+<pre class="brush:shell">curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py</pre>
+<p>Et on l'installe :</p>
+<pre class="brush:shell">sudo python get-pip.py</pre>
+<p>Il se peut que l'on est pas <strong>setuptools</strong> :</p>
+<pre class="brush:shell">An error occured while trying to run get-pip.py. 
+Make sure you have setuptools or distribute installed.</pre>
+<p>Du coup on l'installe : </p>
+<pre class="brush:shell">sudo apt-get install python-setuptools</pre>
+<h2>Django</h2>
+<p>Maintenant on installe Django : </p>
+<pre class="brush:shell">sudo pip install Django==1.6.5</pre>
+<p>Vérification de la version de Django :</p>
+<pre class="brush:shell">python -c "import django; print(django.get_version())"
+1.6.5</pre>
+<h2>Création d'un projet</h2>
+<p>Création initiale d'un projet :</p>
+<pre class="brush:shell">django-admin.py startproject nom_projet</pre>
+<p>Directement, donnons les droits d’exécution à manage.py : </p>
+<pre class="brush:shell">chmod +x manage.py</pre>
+<h2>Lancer le serveur</h2>
+<pre class="brush:shell">./manage.py runserver</pre>
+<p>Et voilà, le projet est accessible depuis <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a><br />
+On peut simplement changer le port ainsi :</p>
+<pre class="brush:shell">./manage.py runserver port</pre>
+<h2>Configuration de la BDD</h2>
+<p>La configuration se fait dans le fichier <strong>settings.py</strong>.</p>
+<p>Installons le support de MySQL pour Python : </p>
+<pre class="brush:shell">sudo apt-get install python-mysqldb</pre>
+<p>Et enfin créons les schémas dans la base SQL :</p>
+<pre class="brush:shell">./manage.py syncdb</pre>
+<h2>Créons une application</h2>
+<pre class="brush:shell">./manage.py startapp mon_app</pre>
+<h2>Savoir où est installé Django</h2>
+<pre class="brush:shell">
+python -c "
+import sys
+sys.path = sys.path[1:]
+import django
+print(django.__path__)"
+</pre>
+<h2>Démarer un projet</h2>
+<pre class="brush:shell">
+./manage.py startproject projet
+</pre>
+<h2>Démarer une application</h2>
+<pre class="brush:shell">
+./manage.py startpapp application
+</pre>
+<h2>Documentation</h2>
+<p><a href="https://code.djangoproject.com/wiki/InitdScriptForLinux" target="_blank">init.d script for Linux</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/ref/django-admin/" target="_blank">Django Admin</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/topics/settings/" target="_blank">Django Settings</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/topics/http/urls/" target="_blank">URLs dispatcher</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/howto/deployment/wsgi/" target="_blank">Deployement with WSGI</a><br />
+<a href="https://docs.djangoproject.com/en/dev/ref/templates/builtins/" target="_blank">Templates</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/ref/models/fields/#field-types" target"=_blank">Fields type</a><br />
+<a href="http://djangosnippets.org/" target="_blank">Django Snippets</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/ref/forms/fields/#built-in-field-classes" target="_blank">Champs pour formulaire</a></p>
+<h2>Références</h2>
+<p><a href="https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release" target="_blank">Installing official Django release</a><br />
+<a href="https://docs.djangoproject.com/en/1.5/intro/install/" target="_blank">Quick Install Guide</a></p>
