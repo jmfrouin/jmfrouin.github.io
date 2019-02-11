@@ -5,7 +5,7 @@ comments: false
 <h1>Software / Source code</h1>
 <a href="/baseconvertor/">BaseConvertor 1.00 C# &amp; Silverlight 2011</a><br/>
 <a href="/contacts">Contacts 0.92 C++ &amp; GDI 2003-2004</a><br/>
-<a href="/clipboards">Clipboards 0.13 C# &amp; WinForms 2011</a><br/>
+<a href="https://github.com/jmfrouin/clipboards">Clipboards 0.13 C# &amp; WinForms 2011</a><br/>
 <a href="https://github.com/jmfrouin/gbemu">gbemu 0.59 C++ &amp; [X11 | SDL] 2008-2012</a><br/>
 <a href="/imagemanip">ImageManip 1.00 C#/.Net 2011</a><br/>
 <a href="/mlp">MLP C++ &amp; wxWidgets 2010</a><br/>
