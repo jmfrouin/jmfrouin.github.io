@@ -15,7 +15,7 @@ comments: false
 <a href="/scleaner">All versions (and platforms) of scleaner</a><br/>
 <a href="/scsvmanager">ScsvManager 0.45 Beta C++ 2004</a><br/>
 <a href="/sinfos">SInfos 1.12 C++ 2004</a><br/>
-<a href="/stweaker">STweaker 2004 1.33 C++ 2004</a><br/>
+<a href="https://github.com/jmfrouin/stweaker">STweaker 2004 1.33 C++ 2004</a><br/>
 <a href="/syatzee">SYatzee C++ / GDI 2004</a><br/>
 <a href="/yatzee2">Yatzee 2.X for Windows 8.X / 10</a><br/>
 <a href="/yatzee">Yatzee 2.00 C# &amp; .Net 2011</a><br/>
