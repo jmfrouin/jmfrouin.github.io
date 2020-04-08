@@ -1,12 +1,15 @@
 ---
-layout: page
-title: MetaSploit Cheat Sheet
+layout: post
+status: publish
+published: true
 permalink: metasploit
+title: MetaSploit Cheat Sheet
 author: Jean-Michel Frouin
 author_login: jmfrouin
 author_email: jm@frouin.me
 author_url: http://frouin.me
 date: '2020-02-25 21:47:05 +0200'
+date_gmt: '2020-02-25 21:47:05 +0200'
 categories:
 - kali
 tags: []
