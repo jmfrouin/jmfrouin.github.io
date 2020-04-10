@@ -18,11 +18,11 @@ comments: []
 ---
 # General infos
 
-OS: 	Linux
-Difficulty: 	Easy
-Points: 	20
-Release: 	30 Sep 2017
-IP: 	10.10.10.56
+- OS: 	Linux
+- Difficulty: 	Easy
+- Points: 	20
+- Release: 	30 Sep 2017
+- IP: 	10.10.10.56
 
 ![MindMap](Shocker.png "Shocker")
 
