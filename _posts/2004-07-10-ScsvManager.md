@@ -25,3 +25,18 @@ comments: []
 <p>Include in the ZIP file :</p>
 <p>ARM,MIPS,SH3,SH4 for HPC Pro (Windows CE 2.11) and ARM,MIPS for HPC 2000</p>
 <p><a class="link" href="http://frouin.me/SC/ScsvManager_SC.zip">SCSVManager 0.45B Source Code</a></p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

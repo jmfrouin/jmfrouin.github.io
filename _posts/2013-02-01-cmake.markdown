@@ -112,3 +112,18 @@ ENDWHILE(var LESS 3600)</pre>
 <pre class="brush:shell">CMAKE_SYSTEM_NAME : Le nom du système donc Linux, Windows ou Generic. Une fois cette variable positionée, cmake positionne CMAKE_CROSSCOMPILING à vrai, ce qui permet de savoir que l'on souhaite crosscompiler l'application. (Après test cela ne fonctionne pas dans la 2.4, CMAKE_CROSSCOMPILING reste indéfini)
 CMAKE_C_COMPILER : Localisation du compilateur C.
 CMAKE_CXX_COMPILER : Localisation du compilateur CXX.</pre>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

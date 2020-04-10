@@ -36,3 +36,18 @@ Pour le paperwhite, c'est encore plus simple et ça se passe <a href="http://www
 <blockquote><p>Menu -&gt; Préférences -&gt; Menu -&gt; Réinitialiser l'appareil</p></blockquote>
 <p>puis de réinstaller le dernier firmware <a href="http://www.amazon.com/gp/help/customer/display.html?nodeId=201064850">disponible</a>. (Dans cet ordre)</p>
 <p>PS: <a href="http://www.mobileread.com/forums/showpost.php?p=2331524&amp;postcount=10">Lien</a> d'origine (anglais)</p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

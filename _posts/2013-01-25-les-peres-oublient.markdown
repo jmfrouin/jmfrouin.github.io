@@ -47,3 +47,18 @@ Et, si l'envie de te gronder me reprend, je me mordrai la langue, je ne cesserai
 " Ce n'est qu'un garçon... un tout petit garçon !"<br />
 J'ai eu tort. Je t'ai traité comme un homme. Maintenant que je te contemple dans ton petit lit, las et abandonné, je vois bien que tu n'es qu'un bébé. Hier encore, tu étais dans les bras de ta mère, la tête sur son épaule...<br />
 J'ai trop exigé de toi... Beaucoup trop...</p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

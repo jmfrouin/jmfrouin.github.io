@@ -137,3 +137,18 @@ sudo sh -c "echo 'Dir::Cache \"\";\nDir::Cache::archives \"\";' >> /etc/apt/apt.
 <a href="https://wiki.debian.org/InstallingDebianOn/Dell/Dell%20XPS%2013" target="_blank">Wiki Debian Dell XPS 13</a><br />
 <a href="https://bugs.launchpad.net/ubuntu/+source/xserver-xorg-input-synaptics/+bug/1263319" target="_blank">Bug Touchpad</a><br />
 <a href="http://www.isalo.org/wiki.debian-fr/index.php?title=L%27etiquetage_de_paquets_via_le_fichier_/etc/apt/preferences#Sid" target="_blank">sources.list pour SID</a></p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

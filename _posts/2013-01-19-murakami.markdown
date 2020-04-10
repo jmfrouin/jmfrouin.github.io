@@ -34,3 +34,18 @@ Tueuse professionnelle, Aomamé se croit investie d'une mission : exécuter les 
 Tengo est un génie des maths, apprenti-écrivain et nègre pour un éditeur qui lui demande de réécrire l'autobiographie d'une jeune fille échappé ç la secte des Précurseurs. Il est aussi régulièrement pris de malaises lors desquels il revoit une scène dont il a été témoin à l'âge d'un an et demi.<br />
 Les deux jeunes gens sont destinés à se retrouver mais où ? Quand ? En 1984 ? Dans 1Q84 ? Dans cette vie ? Dans la mort ?</p></blockquote>
 <p>En tout cas, Murakami devient, pour moi, une valeur sure, jamais déçu par ses livres, bien qu'ayant un style bien à lui, le genre reste toujours un peu le même. Mais chacun de ses livres est rafraichissant et une fois commencer, difficile d’arrêter. </p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

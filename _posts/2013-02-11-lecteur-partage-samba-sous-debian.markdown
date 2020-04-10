@@ -24,3 +24,18 @@ comments: []
 <p>Dans /etc/fstab</p>
 <blockquote><p>//filer1/dev_projets3 /media/filer1 smbfs user,gid=frouin,uid=frouin,username=frouin/DOMAINE 0 0</p></blockquote>
 <p><a href="http://www.andesi.org/index.php?node=27" target="_blank">Référence</a></p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

@@ -59,3 +59,18 @@ secret /dev/sda2 none luks
 <h2>Références</h2>
 <p><a href="https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system" target="_blank">Encrypting a non root file system</a><br />
 <a href="http://mart-e.be/post/2013/01/14/archlinux-avec-luks-et-lvm-sur-un-ssd/" target="_blank">LUKS et LVM sur un SSD</a></p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

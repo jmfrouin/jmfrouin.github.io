@@ -58,3 +58,18 @@ nm -C file | egrep ' t ' | awk '{print $3}' | sort | uniq -c | sort -nr
 <h2>Empreinte mémoire</h2>
 <p>Pour voir l'empreinte mémoire d'un processus il suffit d'aller dans <em>/proc/PID/maps</em>.<br />
 Les segments exécutables ne sont pas dupliqués. Les segments de données, eux, le sont.</p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

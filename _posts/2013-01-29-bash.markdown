@@ -136,3 +136,18 @@ fichier_1 -nt fichier_2 : Vrai si le fichier_1 est plus récent que le fichier_2
 fichier_1 -ot fichier_2 : Vrai si le fichier_1 est plus vieux que le fichier_2 ou si fichier_2 existe et non pas fichier_1.<br />
 fichier_1 -ef fichier_2 : Vrai si le fichier_1 et le fichier_2 se réfèrent au même périphérique et ont les mêmes numéros d’i-n.</p>
 <p><a href="http://tldp.org/LDP/abs/html/string-manipulation.html" target="_blank">String Manipulation</a></p>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.frouin.me/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
