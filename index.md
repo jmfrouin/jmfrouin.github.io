@@ -9,8 +9,6 @@ comments: false
 
 [Software / Source Code](logiciels)
 
-[Links](links)
-
 <h1>Articles</h1>
 <div class="row">
   {% assign count = '0' %}
